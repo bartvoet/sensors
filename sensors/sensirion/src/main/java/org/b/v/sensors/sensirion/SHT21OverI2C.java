@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.b.v.system.I2CConnection;
-import org.b.v.system.rpi.RPII2CDevice;
 
 
 public class SHT21OverI2C {

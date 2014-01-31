@@ -37,7 +37,9 @@ public class SHT21OverI2C {
 	
 	public double readHumidity() throws IOException, InterruptedException{
 		sensor.write(RELATIVE_HUMIDITY_NOHOLD_COMMAND);
-		TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
+		//sytem.
+		
+		//TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
 		//TODO => make a system-class to avoid running waiting and to test the 
 		byte[] d = new byte[3];
 		int numberOfBytes = sensor.read(d, 0, 3);

@@ -33,38 +33,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SensorController {
 	
+	@Autowired
+	private org.b.v.system.System system;
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SensorController.class);
-//	private SHT21OverI2C sensor = null;
 	
 	
 	public SensorController() throws IOException{
 //		sensor = stubSensor();
 	}
 
-	private SHT21OverI2C stubSensor() throws IOException {
-		return new SHT21OverI2C(new I2CConnection() {
-			@Override
-			public void write(byte b) throws IOException {
-				
-			}
-			
-			@Override
-			public int read(byte[] buffer, int offset, int size) throws IOException {
-				byte[] bytes = new byte[3];
-				bytes[0]=99;
-				bytes[1]=3;
-				bytes[2]=3;
-				return 3;
-			}
-		});
-	}
+//	private SHT21OverI2C stubSensor() throws IOException {
+//		return new SHT21OverI2C(new I2CConnection() {
+//			@Override
+//			public void write(byte b) throws IOException {
+//				
+//			}
+//			
+//			@Override
+//			public int read(byte[] buffer, int offset, int size) throws IOException {
+//				byte[] bytes = new byte[3];
+//				bytes[0]=99;
+//				bytes[1]=3;
+//				bytes[2]=3;
+//				return 3;
+//			}
+//		});
+//	}
 	
-	private SHT21OverI2C realSensor() throws IOException {
-		return new SHT21OverI2C(new RPII2CDevice());
-	}
+//	private SHT21OverI2C realSensor() throws IOException {
+//		return new SHT21OverI2C(system.createI2CConnection(0x40));
+//	}
 	
 	private SHT21OverI2C sensor() throws IOException {
-		return stubSensor();
+		return new SHT21OverI2C(system.createI2CConnection(0x40));
+//		return stubSensor();
 	}
 	
 	@RequestMapping(value = "/sensors", method = RequestMethod.GET,produces = "application/json")

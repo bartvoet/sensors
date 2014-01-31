@@ -6,7 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>sensorapi</module>
-  	<module>sensorservices</module>
   	<module>sensirion</module>
   	<module>system</module>
   	<module>restapi</module>

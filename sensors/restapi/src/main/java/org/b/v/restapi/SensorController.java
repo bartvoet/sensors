@@ -40,7 +40,6 @@ public class SensorController {
 	
 	
 	public SensorController() throws IOException{
-//		sensor = stubSensor();
 	}
 
 //	private SHT21OverI2C stubSensor() throws IOException {
@@ -67,14 +66,12 @@ public class SensorController {
 	
 	private SHT21OverI2C sensor() throws IOException {
 		return new SHT21OverI2C(system.createI2CConnection(0x40));
-//		return stubSensor();
 	}
 	
 	@RequestMapping(value = "/sensors", method = RequestMethod.GET,produces = "application/json")
 	@ResponseBody
 	public List<String> sensors() throws IOException, InterruptedException {
 		LOGGER.info("List of sensors");
-//		return Double.toString(stubSensor().readHumidity());
 		List<String> list = new ArrayList<String>();
 		list.add("1");
 		list.add("2");

@@ -2,7 +2,6 @@ package org.b.v.restapi;
 
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,13 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.b.v.sensors.sensirion.SHT21OverI2C;
-import org.b.v.system.I2CConnection;
-import org.b.v.system.rpi.RPII2CDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -42,28 +37,6 @@ public class SensorController {
 	public SensorController() throws IOException{
 	}
 
-//	private SHT21OverI2C stubSensor() throws IOException {
-//		return new SHT21OverI2C(new I2CConnection() {
-//			@Override
-//			public void write(byte b) throws IOException {
-//				
-//			}
-//			
-//			@Override
-//			public int read(byte[] buffer, int offset, int size) throws IOException {
-//				byte[] bytes = new byte[3];
-//				bytes[0]=99;
-//				bytes[1]=3;
-//				bytes[2]=3;
-//				return 3;
-//			}
-//		});
-//	}
-	
-//	private SHT21OverI2C realSensor() throws IOException {
-//		return new SHT21OverI2C(system.createI2CConnection(0x40));
-//	}
-	
 	private SHT21OverI2C sensor() throws IOException {
 		return new SHT21OverI2C(system.createI2CConnection(0x40));
 	}

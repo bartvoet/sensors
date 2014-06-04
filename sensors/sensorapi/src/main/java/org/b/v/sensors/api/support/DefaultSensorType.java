@@ -27,5 +27,5 @@ public class DefaultSensorType implements SensorType {
 		typeNames.add(typeName);
 		return this;
 	}
-
+ 
 }

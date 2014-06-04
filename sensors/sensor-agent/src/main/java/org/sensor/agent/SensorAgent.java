@@ -48,12 +48,6 @@ public class SensorAgent {
 	
 	public SensorAgent() throws IOException{}
 	
-//	private List<Sensor> sensors() throws IOException {
-//		List<Sensor> sensors = new ArrayList<Sensor>();
-//		sensors.add(new SHT21OverI2C(system.createI2CConnection(0x40)));
-//		return sensors;
-//	}
-	
 	@PostConstruct
 	private void after() throws IOException{
 		registry=new DefaultSensorRegistry().addSensor("1", new SHT21OverI2C(system.createI2CConnection(0x40)));
@@ -98,13 +92,5 @@ public class SensorAgent {
 	public void setEvents(SensorEvents events) {
 		this.events = events;
 	}
-	
-	
-//	create table SensorMeassurement (
-//			sensorId varchar(50),
-//			measurementTime time,
-//			functionality varchar(50),
-//			meassurementValue double
-//		);	
 		
 }

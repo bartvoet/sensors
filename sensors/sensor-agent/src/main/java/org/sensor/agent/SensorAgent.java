@@ -15,6 +15,7 @@ import org.b.v.sensors.sensirion.SHT21OverI2C;
 import org.sensor.agent.dependencies.SensorConfiguration;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorLogger;
+import org.sensor.agent.dependencies.SensorMeasurement;
 import org.sensor.agent.dependencies.SensorRegistry;
 import org.sensor.agent.dependencies.support.DefaultSensorRegistry;
 import org.sensor.agent.dependencies.support.EmptySensorEvents;
@@ -54,20 +55,15 @@ public class SensorAgent {
 	}
 	
 	@Scheduled(fixedDelay=15000)
-	public void filldatabase() throws IOException, InterruptedException{
+	public void meassure() throws IOException, InterruptedException{
 		logger.debug("read sensors");
 		
 		for(Sensor sensor : registry.activeSensors()){
 			for(String type : sensor.type().getTypeNames()) {
-				Map<String,Object> parameters = new HashMap<String,Object>();
-				parameters.put("sensorId", "1");
-				parameters.put("measurementTime", new Date());
-				parameters.put("functionality", type);
-				parameters.put("measurementValue", sensor.meassure(type).getValue());
-				jdbcTemplate.update("insert into SensorMeassurement "
-						+ "(sensorId,measurementTime,functionality,measurementValue) "
-						+ "values(:sensorId,:measurementTime,:functionality,:measurementValue)"
-						, parameters);
+				events.pushMeasurement(
+						new SensorMeasurement(
+							"1",type,new Date(),sensor.meassure(type)
+						));
 			}
 		}
 		
@@ -88,7 +84,8 @@ public class SensorAgent {
 	public void setLogger(SensorLogger logger) {
 		this.logger = logger;
 	}
-
+	
+	@Autowired
 	public void setEvents(SensorEvents events) {
 		this.events = events;
 	}

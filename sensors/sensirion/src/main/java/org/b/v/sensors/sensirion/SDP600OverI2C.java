@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorType;
+import org.b.v.sensors.api.SensorValue;
 import org.b.v.system.I2CConnection;
 
 
@@ -61,9 +62,15 @@ public class SDP600OverI2C implements Sensor{
 		return null;
 	}
 
-	public Double meassure(String type) {
+	public SensorValue meassure(String type) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void configure(String parameter, SensorValue value) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -63,7 +63,7 @@ public class SensorAgent {
 				parameters.put("sensorId", "1");
 				parameters.put("measurementTime", new Date());
 				parameters.put("functionality", type);
-				parameters.put("measurementValue", sensor.meassure(type));
+				parameters.put("measurementValue", sensor.meassure(type).getValue());
 				jdbcTemplate.update("insert into SensorMeassurement "
 						+ "(sensorId,measurementTime,functionality,measurementValue) "
 						+ "values(:sensorId,:measurementTime,:functionality,:measurementValue)"

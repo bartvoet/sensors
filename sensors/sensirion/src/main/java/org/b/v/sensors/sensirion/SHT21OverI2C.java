@@ -3,10 +3,16 @@ package org.b.v.sensors.sensirion;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.b.v.sensors.api.Sensor;
+import org.b.v.sensors.api.SensorType;
+import org.b.v.sensors.api.functional.RelativeHumiditySensor;
+import org.b.v.sensors.api.functional.TemperatureSensor;
+import org.b.v.sensors.api.support.DefaultSensorType;
+import org.b.v.sensors.sensirion.error.MeasurmentTypeNotAvailable;
 import org.b.v.system.I2CConnection;
 
 
-public class SHT21OverI2C {
+public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySensor {
 	public final static byte TEMPERATURE_HOLD_COMMAND = (byte) 0xE3;
 	public final static byte RELATIVE_HUMIDITY_HOLD_COMMAND = (byte) 0xE5;
 	public final static byte TEMPERATURE_NOHOLD_COMMAND = (byte) 0xF3;
@@ -37,9 +43,8 @@ public class SHT21OverI2C {
 	
 	public double readHumidity() throws IOException, InterruptedException{
 		sensor.write(RELATIVE_HUMIDITY_NOHOLD_COMMAND);
-		//sytem.
 		
-		//TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
+		TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
 		//TODO => make a system-class to avoid running waiting and to test the 
 		byte[] d = new byte[3];
 		int numberOfBytes = sensor.read(d, 0, 3);
@@ -69,11 +74,22 @@ public class SHT21OverI2C {
 	public static double convertToRH(int val){
 		return - 6.0 + 125/65536.0 * val;//val = ((val * 256) / 134215) - 6;
 	}
+
+	public SensorType type() {
+		return sensorType;
+	}
 	
-//	public static void main(String[] args) throws IOException, InterruptedException {
-//		SHT21OverI2C sensor = new SHT21OverI2C(new RPII2CDevice());
-//		System.out.println(sensor.readTemperature());
-//		System.out.println(sensor.readHumidity());
-//	}
-	
+	public static SensorType sensorType = 
+			new DefaultSensorType()
+				.addTypeName("temperature")
+				.addTypeName("humidity");
+
+	public Double meassure(String type) throws IOException, InterruptedException {
+		switch(type) {
+			case "temperature" : return readTemperature();
+			case "humidity" : return readHumidity();
+		}
+		throw new MeasurmentTypeNotAvailable(type);
+	}
+			
 }

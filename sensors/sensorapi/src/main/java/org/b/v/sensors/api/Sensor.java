@@ -5,9 +5,9 @@ import java.io.IOException;
 
 public interface Sensor {
 	
-	public double readTemperature() throws IOException, InterruptedException;
+	public SensorType type();
 	
-	public double readHumidity() throws IOException, InterruptedException;
+	public Double meassure(String type) throws IOException, InterruptedException;
 	
 	public void softreset() throws IOException, InterruptedException;
 

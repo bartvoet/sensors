@@ -10,6 +10,9 @@
         <dependent-module archiveName="sensorapi-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sensorapi/sensorapi">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="sensor-agent-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sensor-agent/sensor-agent">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="system-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/system/system">
             <dependency-type>uses</dependency-type>
         </dependent-module>

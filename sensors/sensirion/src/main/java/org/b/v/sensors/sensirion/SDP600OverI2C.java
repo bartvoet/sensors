@@ -3,10 +3,12 @@ package org.b.v.sensors.sensirion;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.b.v.sensors.api.Sensor;
+import org.b.v.sensors.api.SensorType;
 import org.b.v.system.I2CConnection;
 
 
-public class SDP600OverI2C {
+public class SDP600OverI2C implements Sensor{
 	public final static byte PRESSURE_NOHOLD_COMMAND = (byte) 0xF1;
 	public final static byte SOFT_RESET               = (byte)0xFE;
 	
@@ -39,6 +41,7 @@ public class SDP600OverI2C {
 
 	private static int extractValue(byte[] d) {
 		int val = d[0];
+		
 		val <<= 8;//shift 8 positions to the left
 		val += d[1];
 		val &= 0xFFFC;
@@ -52,11 +55,15 @@ public class SDP600OverI2C {
 	public static double convertToRH(int val){
 		return - 6.0 + 125/65536.0 * val;//val = ((val * 256) / 134215) - 6;
 	}
-	
-//	public static void main(String[] args) throws IOException, InterruptedException {
-//		SHT21OverI2C sensor = new SHT21OverI2C(new RPII2CDevice());
-//		System.out.println(sensor.readTemperature());
-//		System.out.println(sensor.readHumidity());
-//	}
+
+	public SensorType type() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double meassure(String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

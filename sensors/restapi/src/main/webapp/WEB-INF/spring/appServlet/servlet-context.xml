@@ -24,6 +24,7 @@
 	
 	<context:component-scan base-package="org.b.v.restapi" />
 	<context:component-scan base-package="org.b.v.system" />
+	<context:component-scan base-package="org.sensor.agent" />
 	
  	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
 	<task:executor id="myExecutor" pool-size="5"/>
@@ -32,6 +33,12 @@
 	<jdbc:embedded-database id="embeddedDatasource" type="HSQL">
 		<jdbc:script location="classpath:schema.sql"/>
 	</jdbc:embedded-database>
+	
+	<beans:bean class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="embeddedDatasource"/>
+	</beans:bean>
+	
+	<!-- <beans:import resource="classpath:storage-context.xml"/> -->
 	
 	<beans:bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<beans:constructor-arg index="0" ref="embeddedDatasource"/>

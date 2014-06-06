@@ -36,10 +36,6 @@ public class SensorAgent {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SensorAgent.class);
 	
-	
-	@Autowired
-	private NamedParameterJdbcTemplate jdbcTemplate;
-	
 	@Autowired
 	private org.b.v.system.System system;
 	private SensorRegistry registry=new DefaultSensorRegistry();

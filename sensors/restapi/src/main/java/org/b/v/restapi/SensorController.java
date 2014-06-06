@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.b.v.sensors.api.Sensor;
-import org.b.v.sensors.sensirion.SHT21OverI2C;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +37,6 @@ public class SensorController {
 	public SensorController() throws IOException{
 	}
 
-//	private List<Sensor> sensors() throws IOException {
-//		List<Sensor> sensors = new ArrayList<Sensor>();
-//		sensors.add(new SHT21OverI2C(system.createI2CConnection(0x40)));
-//		return sensors;
-//	}
-	
 	@RequestMapping(value = "/sensors", method = RequestMethod.GET,produces = "application/json")
 	@ResponseBody
 	public List<String> sensorsList() throws IOException, InterruptedException {

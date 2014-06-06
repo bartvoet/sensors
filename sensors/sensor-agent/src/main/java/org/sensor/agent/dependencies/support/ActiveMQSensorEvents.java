@@ -6,16 +6,12 @@ import java.text.SimpleDateFormat;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorMeasurement;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ActiveMQSensorEvents implements SensorEvents {
 
-	@Autowired
-	private NamedParameterJdbcTemplate jdbcTemplate;
-	
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	

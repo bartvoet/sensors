@@ -1,6 +1,5 @@
 package org.sensor.agent.dependencies.support;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

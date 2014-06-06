@@ -1,7 +1,7 @@
 package org.sensor.agent.dependencies.support;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorMeasurement;
@@ -11,7 +11,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActiveMQEmptySensorEvents implements SensorEvents {
+public class ActiveMQSensorEvents implements SensorEvents {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -21,19 +21,11 @@ public class ActiveMQEmptySensorEvents implements SensorEvents {
 	
 	@Override
 	public void pushMeasurement(SensorMeasurement measurement) {
-		Map<String,Object> parameters = new HashMap<String,Object>();
-		parameters.put("sensorId",measurement.getId());
-		parameters.put("measurementTime", measurement.getDate());
-		parameters.put("functionality", measurement.getType());
-		parameters.put("measurementValue", measurement.getValue().getValue());
-		jdbcTemplate.update("insert into SensorMeassurement "
-				+ "(sensorId,measurementTime,functionality,measurementValue) "
-				+ "values(:sensorId,:measurementTime,:functionality,:measurementValue)"
-				, parameters);
 		
+		DateFormat format = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss");
 		String message = measurement.getId() 
 							+ ";" 
-							+ measurement.getDate()
+							+ format.format(measurement.getDate())
 							+ ";"
 							+ measurement.getType()
 							+ ";"

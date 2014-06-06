@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface SensorType {
 	List<String> getConfigurationParameters();
-	List<String> getTypeNames();
+	List<String> getMeasurementTypes();
 }

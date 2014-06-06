@@ -14,7 +14,7 @@ public class DefaultSensorType implements SensorType {
 		return configurationParameters;
 	}
 
-	public List<String> getTypeNames() {
+	public List<String> getMeasurementTypes() {
 		return typeNames;
 	}
 	

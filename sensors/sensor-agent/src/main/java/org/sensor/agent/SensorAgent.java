@@ -59,7 +59,7 @@ public class SensorAgent {
 		logger.debug("read sensors");
 		
 		for(Sensor sensor : registry.activeSensors()){
-			for(String type : sensor.type().getTypeNames()) {
+			for(String type : sensor.type().getMeasurementTypes()) {
 				events.pushMeasurement(
 						new SensorMeasurement(
 							"1",type,new Date(),sensor.meassure(type)

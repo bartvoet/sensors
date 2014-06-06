@@ -25,6 +25,8 @@
 	<context:component-scan base-package="org.b.v.restapi" />
 	<context:component-scan base-package="org.b.v.system" />
 	<context:component-scan base-package="org.sensor.agent" />
+	<context:component-scan base-package="org.b.v.hub" />
+	
 	
  	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
 	<task:executor id="myExecutor" pool-size="5"/>
@@ -57,7 +59,7 @@
   </beans:bean>
   
   <!-- this is the Message Driven POJO (MDP) -->
-<beans:bean id="messageListener" class="org.b.v.restapi.SensorHubEvents" />
+<beans:bean id="messageListener" class="org.b.v.hub.SensorHubEvents" />
 
 <!-- and this is the message listener container -->
 <beans:bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">

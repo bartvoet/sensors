@@ -1,4 +1,5 @@
-package org.b.v.restapi;
+package org.b.v.hub;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,12 +27,10 @@ public class SensorHubEvents implements MessageListener {
     public void onMessage(Message message) {
         if (message instanceof TextMessage) {
             try {
-//                System.out.println(((TextMessage) message).getText());
                 String string = ((TextMessage) message).getText();
             	@SuppressWarnings("resource")
 				Scanner scanner = new Scanner(string).useDelimiter(";");
             	
-                
             	DateFormat format = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss");
         		Map<String,Object> parameters = new HashMap<String,Object>();
         		parameters.put("sensorId",scanner.next());

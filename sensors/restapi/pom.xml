@@ -31,6 +31,13 @@
 		
 		<dependency>
 			<groupId>org.b.v</groupId>
+			<artifactId>sensorhub</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.b.v</groupId>
 			<artifactId>system</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -166,7 +173,7 @@
 			<version>3.0</version> </dependency> <dependency> <groupId>asm</groupId> 
 			<artifactId>asm</artifactId> <version>3.3.1</version> </dependency> -->
 			
-			    <dependency>
+	<dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-all</artifactId>
       <version>5.1.0</version>

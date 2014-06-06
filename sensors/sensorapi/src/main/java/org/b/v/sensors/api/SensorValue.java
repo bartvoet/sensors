@@ -2,24 +2,24 @@ package org.b.v.sensors.api;
 
 public class SensorValue {
 
-	private SensorValueType type;
 	private Object value;
+	private SensorValueDefinition definition;
 	
-	public SensorValue(SensorValueType type,Object value) {
-		this.type=type;
+	public SensorValue(SensorValueDefinition definition,Object value) {
+		this.definition=definition;
 		this.value=value;
 	}
 	
-	public SensorValueType getType() {
-		return type;
+	public SensorValueDefinition getDefinition() {
+		return definition;
 	}
 	
 	public Object getValue() {
 		return value;
 	}
 
-	public static SensorValue decimal(double readTemperature) {
-		return new SensorValue(SensorValueType.DECIMAL,readTemperature);
+	public static SensorValue decimal(String name,double readTemperature) {
+		return new SensorValue(new SensorValueDefinition(name,SensorValueType.DECIMAL),readTemperature);
 	}
 	
 }

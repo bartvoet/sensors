@@ -23,7 +23,7 @@ public class DefaultSensorType implements SensorType {
 		return this;
 	}
 	
-	public DefaultSensorType addTypeName(String typeName) {
+	public DefaultSensorType addMeassurementType(String typeName) {
 		typeNames.add(typeName);
 		return this;
 	}

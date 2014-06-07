@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.b.v.system.I2CConnection;
-import org.b.v.system.System;
 import org.springframework.stereotype.Component;
 
-@Component
-public class RPI implements System {
+@Component("system")
+public class RPI implements org.b.v.system.System {
 
 	public I2CConnection createI2CConnection(int adress) throws IOException {
 		return new RPII2CDevice();

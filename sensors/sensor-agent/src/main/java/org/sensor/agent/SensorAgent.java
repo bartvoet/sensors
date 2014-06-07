@@ -38,17 +38,20 @@ public class SensorAgent {
 	
 	@Autowired
 	private org.b.v.system.System system;
+	
+	@Autowired
 	private SensorRegistry registry=new DefaultSensorRegistry();
+	
 	private SensorConfiguration configuration=new InMemorySensorConfiguration();
 	private SensorLogger logger=new EmptySensorLogger();
 	private SensorEvents events=new EmptySensorEvents();
 	
 	public SensorAgent() throws IOException{}
 	
-	@PostConstruct
-	private void after() throws IOException{
-		registry=new DefaultSensorRegistry().addSensor("1", new SHT21OverI2C(system.createI2CConnection(0x40)));
-	}
+//	@PostConstruct
+//	private void after() throws IOException{
+//		registry=new DefaultSensorRegistry().addSensor("1", new SHT21OverI2C(system.createI2CConnection(0x40)));
+//	}
 	
 	@Scheduled(fixedDelay=15000)
 	public void meassure() throws IOException, InterruptedException{

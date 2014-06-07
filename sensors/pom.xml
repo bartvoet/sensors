@@ -55,5 +55,6 @@
   	<module>sensor-storage-memory</module>
   	<module>sensor-storage-database</module>
     <module>sensor-agent</module>
+    <module>rpi-system</module>
   </modules>
 </project>

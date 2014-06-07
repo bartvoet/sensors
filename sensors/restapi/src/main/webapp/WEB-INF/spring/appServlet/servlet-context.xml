@@ -53,7 +53,6 @@
   	</beans:bean>
   	
 
-  <!-- Spring JMS Template -->
   <beans:bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
     <beans:property name="connectionFactory" ref="jmsFactory"/>
   </beans:bean>

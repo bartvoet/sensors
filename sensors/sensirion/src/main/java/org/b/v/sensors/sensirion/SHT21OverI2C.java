@@ -23,11 +23,11 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	
 	private I2CConnection sensor;
 	
-	public SHT21OverI2C(I2CConnection device) throws IOException {
-		if(device==null){
-			throw new IllegalArgumentException("Cannot instantiate with a I2C-implementation");
+	public SHT21OverI2C(org.b.v.system.System system) throws IOException {
+		if(system==null){
+			throw new IllegalArgumentException("Cannot instantiate an I2C-implementation without a valid system");
 		}
-		sensor = device;
+		sensor = system.createI2CConnection(40);
 	}
 	
 	public double readTemperature() throws IOException, InterruptedException{

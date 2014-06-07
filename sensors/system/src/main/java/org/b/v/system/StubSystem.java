@@ -2,13 +2,13 @@ package org.b.v.system;
 
 import java.io.IOException;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+//import org.springframework.context.annotation.Primary;
+//import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-@Component
-@Primary
-@Profile("stubbed")
+@Component("system")
+//@Primary
+//@Profile("stubbed")
 public class StubSystem implements System {
 
 	public I2CConnection createI2CConnection(int adress) throws IOException {

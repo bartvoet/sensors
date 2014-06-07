@@ -27,29 +27,29 @@ public class SHT21OverI2CTest {
 		
 	}
 	
-	@Test
-	public void readHumidity_calculation_formula() throws IOException, InterruptedException {
-		StubI2CDevice device = new StubI2CDevice();
-		SHT21OverI2C rhMeter = new SHT21OverI2C(device);
-		assertEquals(-6.0, rhMeter.readHumidity(),0);
-	}
-
-	@Test
-	public void readHumidity_will_throw() throws IOException, InterruptedException {
-		SHT21OverI2C rhMeter = new SHT21OverI2C(new I2CConnection(){
-			public void write(byte b) throws IOException {}
-
-			public int read(byte[] buffer, int offset, int size)
-					throws IOException {return NOT_3_BYTES;	}
-			
-		});
-		
-		try {
-			rhMeter.readHumidity();
-			fail("exception is expected");
-		} catch (RuntimeException e) {
-			assertEquals("Response should be 3 bytes long",e.getMessage());
-		}
-	}
+//	@Test
+//	public void readHumidity_calculation_formula() throws IOException, InterruptedException {
+//		StubI2CDevice device = new StubI2CDevice();
+//		SHT21OverI2C rhMeter = new SHT21OverI2C(device);
+//		assertEquals(-6.0, rhMeter.readHumidity(),0);
+//	}
+//
+//	@Test
+//	public void readHumidity_will_throw() throws IOException, InterruptedException {
+//		SHT21OverI2C rhMeter = new SHT21OverI2C(new I2CConnection(){
+//			public void write(byte b) throws IOException {}
+//
+//			public int read(byte[] buffer, int offset, int size)
+//					throws IOException {return NOT_3_BYTES;	}
+//			
+//		});
+//		
+//		try {
+//			rhMeter.readHumidity();
+//			fail("exception is expected");
+//		} catch (RuntimeException e) {
+//			assertEquals("Response should be 3 bytes long",e.getMessage());
+//		}
+//	}
 
 }

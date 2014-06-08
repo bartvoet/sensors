@@ -61,7 +61,7 @@ public class SensorAgent {
 			for(String type : sensor.type().getMeasurementTypes()) {
 				events.pushMeasurement(
 						new SensorMeasurement(
-							sensor.id(),type,new Date(),sensor.meassure(type)
+							sensor.identification(),type,new Date(),sensor.meassure(type)
 						));
 			}
 		}

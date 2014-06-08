@@ -46,7 +46,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 
 	@Override
-	public String id() {
+	public String identification() {
 		return id;
 	}
 	

@@ -6,6 +6,8 @@ import org.b.v.sensors.api.error.SensorConfigurationException;
 
 
 public interface Sensor {
+
+	public String identification();
 	
 	public SensorType type();
 	
@@ -15,6 +17,5 @@ public interface Sensor {
 	
 	public void softreset() throws IOException, InterruptedException;
 
-	public String id();
 
 }

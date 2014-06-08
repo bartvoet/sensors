@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorType;
 import org.b.v.sensors.api.SensorValue;
+import org.b.v.sensors.api.SensorValueType;
 import org.b.v.sensors.api.error.SensorConfigurationException;
 import org.b.v.sensors.api.functional.RelativeHumiditySensor;
 import org.b.v.sensors.api.functional.TemperatureSensor;
@@ -90,9 +91,9 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	
 	public static SensorType sensorType = 
 			new DefaultSensorType()
-				.addMeassurementType("temperature")
-				.addMeassurementType("humidity")
-				.addConfigurationParameter("resulution");
+				.addMeassurementType("temperature",SensorValueType.DECIMAL)
+				.addMeassurementType("humidity",SensorValueType.DECIMAL)
+				.addConfigurationParameter("resulution",SensorValueType.LONG);
 
 	public SensorValue meassure(String type) throws IOException, InterruptedException {
 		switch(type) {

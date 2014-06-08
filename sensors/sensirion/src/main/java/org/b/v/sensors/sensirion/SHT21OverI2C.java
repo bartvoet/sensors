@@ -22,8 +22,10 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	public final static byte SOFT_RESET               = (byte)0xFE;
 	
 	private I2CConnection sensor;
+	private String id;
 	
-	public SHT21OverI2C(org.b.v.system.System system) throws IOException {
+	public SHT21OverI2C(String id,org.b.v.system.System system) throws IOException {
+		this.id=id;
 		if(system==null){
 			throw new IllegalArgumentException("Cannot instantiate an I2C-implementation without a valid system");
 		}
@@ -41,6 +43,11 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 			throw new RuntimeException("Response should be 3 bytes long");
 		}
 		return convertToTemperature(extractValue(d)); 
+	}
+
+	@Override
+	public String id() {
+		return id;
 	}
 	
 	public double readHumidity() throws IOException, InterruptedException{
@@ -100,5 +107,6 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 		
 		
 	}
+
 			
 }

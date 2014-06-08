@@ -15,4 +15,6 @@ public interface Sensor {
 	
 	public void softreset() throws IOException, InterruptedException;
 
+	public String id();
+
 }

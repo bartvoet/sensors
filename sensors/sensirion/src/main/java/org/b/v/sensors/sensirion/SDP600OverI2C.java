@@ -72,5 +72,11 @@ public class SDP600OverI2C implements Sensor{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String id() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

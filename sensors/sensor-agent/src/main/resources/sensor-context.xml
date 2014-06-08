@@ -13,5 +13,10 @@
 		<constructor-arg index="1" ref="system"/>
 	</bean>
 	
+<!-- 	<bean class="org.b.v.sensors.sensirion.SDP600OverI2C">
+		<constructor-arg index="0" value="hello"/>
+		<constructor-arg index="1" ref="system"/>
+	</bean> -->
+	
 
 </beans>

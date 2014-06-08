@@ -1,8 +1,8 @@
 package org.b.v.sensors.sensirion.error;
 
-public class MeasurmentTypeNotAvailable extends RuntimeException {
+public class MeasurementTypeNotAvailable extends RuntimeException {
 
-	public MeasurmentTypeNotAvailable(String type) {
+	public MeasurementTypeNotAvailable(String type) {
 		super(type==null?"null":type + " is not available");
 	}
 

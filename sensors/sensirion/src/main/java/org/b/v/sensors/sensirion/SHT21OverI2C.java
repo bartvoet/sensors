@@ -11,7 +11,7 @@ import org.b.v.sensors.api.error.SensorConfigurationException;
 import org.b.v.sensors.api.functional.RelativeHumiditySensor;
 import org.b.v.sensors.api.functional.TemperatureSensor;
 import org.b.v.sensors.api.support.DefaultSensorType;
-import org.b.v.sensors.sensirion.error.MeasurmentTypeNotAvailable;
+import org.b.v.sensors.sensirion.error.MeasurementTypeNotAvailable;
 import org.b.v.system.I2CConnection;
 
 
@@ -68,6 +68,23 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 		  sensor.write(SOFT_RESET);
 		  TimeUnit.MILLISECONDS.sleep(50); // < 15 
 	}
+	
+//    public long getResolution() {
+//        this.softreset();
+//        try {
+//        	sensor.write(Command.USER_REG_R.getCommandByte());
+//            delay(100);
+//
+//            byte[] bytes = new byte[1];
+//            device.read(bytes, 0, 1);
+//            Resolution resolution = getBit(bytes[0]);
+//            return resolution;
+//        } catch (IOException e) {
+//            LOG.error("getResolution() failed.", e);
+//        }
+//        LOG.trace("Finished getResolution()");
+//        return Resolution.RES_UNDEFINED;
+//    }
 
 	private static int extractValue(byte[] d) {
 		int val = d[0];
@@ -100,13 +117,12 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 			case "temperature" : return SensorValue.decimal("temperature",readTemperature());
 			case "humidity" : return SensorValue.decimal("humidity",readHumidity());
 		}
-		throw new MeasurmentTypeNotAvailable(type);
+		throw new MeasurementTypeNotAvailable(type);
 	}
 
 	@Override
 	public void configure(String parameter, SensorValue value) throws SensorConfigurationException {
-		
-		
+		//TODO
 	}
 
 			

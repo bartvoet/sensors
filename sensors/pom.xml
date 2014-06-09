@@ -46,16 +46,17 @@
 	</build>
   
   <modules>
-  	<module>sensor-api</module>
-  	<module>sensor-sensirion</module>
-  	<module>system-api</module>
   	<module>hub-runtime</module>
   	<module>hub-events-mq</module>
   	<module>storage-api</module>
   	<module>storage-memory</module>
   	<module>storage-database</module>
     <module>agent-runtime</module>
-    <module>system-raspberrypi</module>
+  	<module>sensor-api</module>
+  	<module>sensor-sensirion</module>
     <module>sensor-bosch</module>
+  	<module>system-api</module>
+    <module>system-raspberrypi-raspbian</module>
+    <module>system-olimex_A20-android</module>
   </modules>
 </project>

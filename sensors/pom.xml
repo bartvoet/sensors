@@ -46,15 +46,15 @@
 	</build>
   
   <modules>
-  	<module>sensorapi</module>
-  	<module>sensirion</module>
-  	<module>system</module>
-  	<module>restapi</module>
-  	<module>sensorhub</module>
+  	<module>sensor-api</module>
+  	<module>sensor-sensirion</module>
+  	<module>system-api</module>
+  	<module>hub-runtime</module>
+  	<module>hub-events-mq</module>
   	<module>storage-api</module>
   	<module>storage-memory</module>
   	<module>storage-database</module>
-    <module>sensoragent</module>
-    <module>rpi-system</module>
+    <module>agent-runtime</module>
+    <module>system-raspberrypi</module>
   </modules>
 </project>

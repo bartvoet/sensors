@@ -6,7 +6,7 @@
 		<artifactId>sensors</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>rpi-system</artifactId>
+	<artifactId>system-raspberrypi</artifactId>
 	
 	<properties>
 		<java-version>1.6</java-version>
@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.b.v</groupId>
-			<artifactId>system</artifactId>
+			<artifactId>system-api</artifactId>
 			<version>${project.version}</version>		
 		</dependency>
 

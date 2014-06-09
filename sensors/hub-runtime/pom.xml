@@ -6,7 +6,7 @@
 		<artifactId>sensors</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>restapi</artifactId>
+	<artifactId>hub-runtime</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
@@ -19,16 +19,16 @@
 		
 		<dependency>
 			<groupId>org.b.v</groupId>
-			<artifactId>sensorhub</artifactId>
+			<artifactId>hub-events-mq</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.b.v</groupId>
-			<artifactId>system</artifactId>
+			<artifactId>system-api</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency> -->
 	
 	
 		<!-- Spring -->

@@ -19,12 +19,12 @@
 			<version>${project.version}</version>
 		</dependency>
 		
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.b.v</groupId>
 			<artifactId>sensor-agent</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>org.b.v</groupId>

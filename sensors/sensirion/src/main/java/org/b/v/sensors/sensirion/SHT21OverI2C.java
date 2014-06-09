@@ -18,20 +18,20 @@ import org.b.v.system.SensorHostSystem;
 
 
 public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySensor {
-	public final static byte TEMPERATURE_HOLD_COMMAND = (byte) 0xE3;
-	public final static byte RELATIVE_HUMIDITY_HOLD_COMMAND = (byte) 0xE5;
-	public final static byte TEMPERATURE_NOHOLD_COMMAND = (byte) 0xF3;
-	public final static byte RELATIVE_HUMIDITY_NOHOLD_COMMAND = (byte) 0xF5;
+	private static final String MEASUREMENT_FOR_TEMPERATURE = "temperature";
+	public final static byte COMMAND_FOR_TEMPERATURE_WITH_HOLD = (byte) 0xE3;
+	public final static byte COMMAND_FOR_RELATIVE_HUMIDITY_WITH_HOLD = (byte) 0xE5;
+	public final static byte COMMAND_FOR_TEMPERATURE_WITH_NOHOLD = (byte) 0xF3;
+	public final static byte COMMAND_FOR_RELATIVE_HUMIDITY_WITH_NOHOLD = (byte) 0xF5;
 	
-	public final static byte SOFT_RESET               = (byte)0xFE;//1111’1110
-
-	public final static byte USER_REGISTRY_WRITE      = (byte)0xE6;//1110’0110
-	public final static byte USER_REGISTRY_READ      = (byte)0xE7;//1110’0110
+	public final static byte COMMAND_FOR_SOFT_RESET               = (byte)0xFE;//1111’1110
+	public final static byte COMMAND_FOR_USER_REGISTRY_WRITE      = (byte)0xE6;//1110’0110
+	public final static byte COMMAND_FOR_USER_REGISTRY_READ      = (byte)0xE7;//1110’0110
 	
-	public final static String RESOLUTION_TEMP_14_RH_12 = "RESOLUTION_TEMP_14_RH_12";
-	public final static String RESOLUTION_TEMP_12_RH_8 = "RESOLUTION_TEMP_12_RH_8";
-	public final static String RESOLUTION_TEMP_13_RH_10 = "RESOLUTION_TEMP_13_RH_10";
-	public final static String RESOLUTION_TEMP_11_RH_11 = "RESOLUTION_TEMP_11_RH_11";
+	public final static String OPTION_FOR_RESOLUTION_TEMP_14_RH_12 = "RESOLUTION_TEMP_14_RH_12";
+	public final static String OPTION_FOR_RESOLUTION_TEMP_12_RH_8 = "RESOLUTION_TEMP_12_RH_8";
+	public final static String OPTION_FOR_RESOLUTION_TEMP_13_RH_10 = "RESOLUTION_TEMP_13_RH_10";
+	public final static String OPTION_FOR_RESOLUTION_TEMP_11_RH_11 = "RESOLUTION_TEMP_11_RH_11";
 	
 	private SensorHostSystem system;
 	private I2CConnection i2c;
@@ -48,7 +48,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 	
 	public double readTemperature() throws IOException, InterruptedException{
-		i2c.write(TEMPERATURE_NOHOLD_COMMAND);
+		i2c.write(COMMAND_FOR_TEMPERATURE_WITH_NOHOLD);
 		system.waitMillis(100);
 		byte[] rawValue = new byte[3];
 		int numberOfBytes = i2c.read(rawValue, 0, 3);
@@ -65,7 +65,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 	
 	public double readHumidity() throws IOException, InterruptedException{
-		i2c.write(RELATIVE_HUMIDITY_NOHOLD_COMMAND);
+		i2c.write(COMMAND_FOR_RELATIVE_HUMIDITY_WITH_NOHOLD);
 		system.waitMillis(100);
 		byte[] d = new byte[3];
 		int numberOfBytes = i2c.read(d, 0, 3);
@@ -76,7 +76,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 	
 	public void softreset() throws IOException, InterruptedException{
-		  i2c.write(SOFT_RESET);
+		  i2c.write(COMMAND_FOR_SOFT_RESET);
 		  system.waitMillis(50);// < 15 
 	}
 	
@@ -99,14 +99,14 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	
 	public static SensorType sensorType = 
 			new DefaultSensorType()
-				.addMeassurementType("temperature",SensorValueType.DECIMAL)
+				.addMeassurementType(MEASUREMENT_FOR_TEMPERATURE,SensorValueType.DECIMAL)
 				.addMeassurementType("humidity",SensorValueType.DECIMAL)
 				.addConfigurationParameterWithOptions
 									("resolution",SensorValueType.STRING,
-										RESOLUTION_TEMP_14_RH_12,
-										RESOLUTION_TEMP_12_RH_8,
-										RESOLUTION_TEMP_11_RH_11,
-										RESOLUTION_TEMP_13_RH_10);
+										OPTION_FOR_RESOLUTION_TEMP_14_RH_12,
+										OPTION_FOR_RESOLUTION_TEMP_12_RH_8,
+										OPTION_FOR_RESOLUTION_TEMP_11_RH_11,
+										OPTION_FOR_RESOLUTION_TEMP_13_RH_10);
 
 	public SensorType type() {
 		return sensorType;
@@ -115,7 +115,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	@Override
 	public SensorValue meassure(String type) throws IOException, InterruptedException {
 		switch(type) {
-			case "temperature" : return SensorValue.decimal("temperature",readTemperature());
+			case MEASUREMENT_FOR_TEMPERATURE : return SensorValue.decimal(MEASUREMENT_FOR_TEMPERATURE,readTemperature());
 			case "humidity" : return SensorValue.decimal("humidity",readHumidity());
 		}
 		throw new MeasurementTypeNotAvailable(type);
@@ -137,16 +137,16 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 		String newResolution = (String) value.getValue();
 		byte registerContent = readRegister();
 		switch(newResolution) {
-			case RESOLUTION_TEMP_14_RH_12 : 
+			case OPTION_FOR_RESOLUTION_TEMP_14_RH_12 : 
 				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
 				break;
-			case RESOLUTION_TEMP_12_RH_8 : 
+			case OPTION_FOR_RESOLUTION_TEMP_12_RH_8 : 
 				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
 				break;
-			case RESOLUTION_TEMP_13_RH_10: 
+			case OPTION_FOR_RESOLUTION_TEMP_13_RH_10: 
 				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
 				break;
-			case RESOLUTION_TEMP_11_RH_11: 
+			case OPTION_FOR_RESOLUTION_TEMP_11_RH_11: 
 				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
 				break;
 			default : throw new NotAnAllowedValueForConfiguration("resolution",newResolution);
@@ -158,7 +158,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 	
 	private byte readRegister() throws IOException{
-        i2c.write(USER_REGISTRY_READ);
+        i2c.write(COMMAND_FOR_USER_REGISTRY_READ);
         system.waitMillis(100);
         byte[] bytes = new byte[1];
         i2c.read(bytes, 0, 1);
@@ -169,7 +169,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	private void changeRegister(byte content) throws IOException{
 		byte registryBuffer[] = new byte[0];
 		i2c.read(registryBuffer, 0, 1);
-		i2c.write(USER_REGISTRY_WRITE,content);
+		i2c.write(COMMAND_FOR_USER_REGISTRY_WRITE,content);
 	}
 	
 //	private static boolean valueOfBitAtPosition(byte number,byte position){

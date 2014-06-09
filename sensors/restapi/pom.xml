@@ -16,18 +16,6 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.b.v</groupId>
-			<artifactId>sensirion</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.b.v</groupId>
-			<artifactId>sensor-agent</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.b.v</groupId>

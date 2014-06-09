@@ -25,6 +25,11 @@ public class DefaultSensorType implements SensorType {
 		return this;
 	}
 	
+	public DefaultSensorType addConfigurationParameterWithOptions(String parameter,SensorValueType type,Object ...options) {
+		configurationParameters.add(new SensorValueDefinition(parameter, type,options));
+		return this;
+	}
+	
 	public DefaultSensorType addMeassurementType(String typeName,SensorValueType type) {
 		typeNames.add(new SensorValueDefinition(typeName, type));
 		return this;

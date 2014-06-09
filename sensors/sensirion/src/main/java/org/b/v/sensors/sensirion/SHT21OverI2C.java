@@ -96,15 +96,21 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 		return - 6.0 + 125/65536.0 * val;//val = ((val * 256) / 134215) - 6;
 	}
 
-	public SensorType type() {
-		return sensorType;
-	}
 	
 	public static SensorType sensorType = 
 			new DefaultSensorType()
 				.addMeassurementType("temperature",SensorValueType.DECIMAL)
 				.addMeassurementType("humidity",SensorValueType.DECIMAL)
-				.addConfigurationParameter("resolution",SensorValueType.STRING);
+				.addConfigurationParameterWithOptions
+									("resolution",SensorValueType.STRING,
+										RESOLUTION_TEMP_14_RH_12,
+										RESOLUTION_TEMP_12_RH_8,
+										RESOLUTION_TEMP_11_RH_11,
+										RESOLUTION_TEMP_13_RH_10);
+
+	public SensorType type() {
+		return sensorType;
+	}
 
 	@Override
 	public SensorValue meassure(String type) throws IOException, InterruptedException {

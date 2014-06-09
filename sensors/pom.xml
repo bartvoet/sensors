@@ -51,9 +51,9 @@
   	<module>system</module>
   	<module>restapi</module>
   	<module>sensorhub</module>
-  	<module>sensor-storage-api</module>
-  	<module>sensor-storage-memory</module>
-  	<module>sensor-storage-database</module>
+  	<module>storage-api</module>
+  	<module>storage-memory</module>
+  	<module>storage-database</module>
     <module>sensoragent</module>
     <module>rpi-system</module>
   </modules>

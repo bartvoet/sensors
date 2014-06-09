@@ -5,5 +5,5 @@
     <artifactId>sensors</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>sensor-storage-api</artifactId>
+  <artifactId>storage-memory</artifactId>
 </project>

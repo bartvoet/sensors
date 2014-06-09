@@ -47,8 +47,10 @@ public class SensorHubEvents implements MessageListener {
             }
             catch (JMSException ex) {
                 throw new RuntimeException(ex);
+                //TODO store problems
             } catch (ParseException e) {
             	throw new RuntimeException(e);
+            	//TODO store problems
 			}
         }
         else {

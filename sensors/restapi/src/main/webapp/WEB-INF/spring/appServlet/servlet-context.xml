@@ -1,70 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
-	<annotation-driven />
+	<mvc:annotation-driven />
 
-<!-- 	<resources mapping="/resources/**" location="/resources/" />
-
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean> -->
-	
 	<context:component-scan base-package="org.b.v.restapi" />
 	<context:component-scan base-package="org.b.v.system" />
-<!-- 	<context:component-scan base-package="org.sensor.agent" />
- -->	<context:component-scan base-package="org.b.v.hub" />
-	
-	
-<!--  	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
-	<task:executor id="myExecutor" pool-size="5"/>
-	<task:scheduler id="myScheduler" pool-size="10"/>  -->
-	
-	<jdbc:embedded-database id="embeddedDatasource" type="HSQL">
-		<jdbc:script location="classpath:schema.sql"/>
+	<context:component-scan base-package="org.b.v.hub" />
+
+	<jdbc:embedded-database id="embeddedDatasource"
+		type="HSQL">
+		<jdbc:script location="classpath:schema.sql" />
 	</jdbc:embedded-database>
-	
-	<beans:bean class="org.springframework.jdbc.core.JdbcTemplate">
-		<beans:property name="dataSource" ref="embeddedDatasource"/>
-	</beans:bean>
-	
-	<!-- <beans:import resource="classpath:storage-context.xml"/> -->
-	
-	<beans:bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-		<beans:constructor-arg index="0" ref="embeddedDatasource"/>
-	</beans:bean>
-	
-	<beans:bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-	    <beans:property name="brokerURL">
-	      <beans:value>tcp://localhost:61616</beans:value>
-	    </beans:property>
-  	</beans:bean>
-  	
 
-  <beans:bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-    <beans:property name="connectionFactory" ref="jmsFactory"/>
-  </beans:bean>
-  
-  <!-- this is the Message Driven POJO (MDP) -->
-<beans:bean id="messageListener" class="org.b.v.hub.SensorHubEvents" />
+	<bean class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="embeddedDatasource" />
+	</bean>
 
-<!-- and this is the message listener container -->
-<beans:bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <beans:property name="connectionFactory" ref="jmsFactory"/>
-    <beans:property name="destinationName" value="sensor_in"/>
-    <beans:property name="messageListener" ref="messageListener" />
-</beans:bean>
-	
-</beans:beans>
+	<!-- <import resource="classpath:storage-context.xml"/> -->
+
+	<bean
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg index="0"
+			ref="embeddedDatasource" />
+	</bean>
+
+	<bean id="jmsFactory"
+		class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL">
+			<value>tcp://localhost:61616</value>
+		</property>
+	</bean>
+
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsFactory" />
+	</bean>
+
+	<bean id="messageListener" class="org.b.v.hub.SensorHubEvents" />
+
+	<bean id="jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsFactory" />
+		<property name="destinationName" value="sensor_in" />
+		<property name="messageListener" ref="messageListener" />
+	</bean>
+
+</beans>

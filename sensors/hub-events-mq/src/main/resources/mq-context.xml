@@ -10,30 +10,30 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
 
-	<import resource="classpath:mq-context.xml"/>
+	<!-- TODO make sure to put this a profile (and extract in a separate module) -->
+	<amq:broker useJmx="false" persistent="false">
+		<amq:transportConnectors>
+			<amq:transportConnector uri="tcp://localhost:61616" />
+		</amq:transportConnectors>
+	</amq:broker>
 
-	<mvc:annotation-driven />
-
-	<context:component-scan base-package="org.b.v.restapi" />
-	<context:component-scan base-package="org.b.v.system" />
-	<context:component-scan base-package="org.b.v.hub" />
-
-	<jdbc:embedded-database id="embeddedDatasource"
-		type="HSQL">
-		<jdbc:script location="classpath:schema.sql" />
-	</jdbc:embedded-database>
-
-	<bean class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="embeddedDatasource" />
+	<bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL">
+			<value>tcp://localhost:61616</value>
+		</property>
 	</bean>
 
-	<!-- <import resource="classpath:storage-context.xml"/> -->
-
-	<bean
-		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-		<constructor-arg index="0" ref="embeddedDatasource" />
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsFactory" />
 	</bean>
 
+	<bean id="messageListener" class="org.b.v.hub.SensorHubEvents" />
 
+	<bean id="jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsFactory" />
+		<property name="destinationName" value="sensor_in" />
+		<property name="messageListener" ref="messageListener" />
+	</bean>
 
 </beans>

@@ -56,5 +56,6 @@
   	<module>storage-database</module>
     <module>agent-runtime</module>
     <module>system-raspberrypi</module>
+    <module>sensor-bosch</module>
   </modules>
 </project>

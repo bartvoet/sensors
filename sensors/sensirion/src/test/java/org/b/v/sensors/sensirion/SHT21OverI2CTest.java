@@ -14,15 +14,23 @@ public class SHT21OverI2CTest {
 	private static final int NOT_3_BYTES = 0;
 
 	private static class StubI2CDevice implements I2CConnection{
+		@Override
 		public void write(byte b) throws IOException {
 			// TODO Auto-generated method stub
 		}
 
+		@Override
 		public int read(byte[] buffer, int offset, int size) throws IOException {
 			byte[] bytes = new byte[3];
 			bytes[0]=99;bytes[1]=3;
 			bytes[2]=3;
 			return 3;
+		}
+
+		@Override
+		public void write(byte... b) throws IOException {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	}

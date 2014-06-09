@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SensorController {
 	
 	@Autowired
-	private org.b.v.system.System system;
+	private org.b.v.system.SensorHostSystem system;
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;

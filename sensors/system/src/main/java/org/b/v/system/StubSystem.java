@@ -9,10 +9,11 @@ import org.springframework.stereotype.Component;
 @Component("system")
 //@Primary
 //@Profile("stubbed")
-public class StubSystem implements System {
+public class StubSystem implements SensorHostSystem {
 
 	public I2CConnection createI2CConnection(int adress) throws IOException {
 		return new I2CConnection() {
+			@Override
 			public void write(byte b) throws IOException {
 				
 			}
@@ -24,11 +25,17 @@ public class StubSystem implements System {
 				bytes[2]=3;
 				return 3;
 			}
+
+
+			@Override
+			public void write(byte... b) throws IOException {
+				
+			}
 		};
 	}
 
-	public void wait(int milliseconds) {
-		
+	public void waitMillis(int milliseconds) {
+		//do nothing since this is only used for simulation
 	}
 
 }

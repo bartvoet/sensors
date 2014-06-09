@@ -11,8 +11,10 @@ import org.b.v.sensors.api.error.SensorConfigurationException;
 import org.b.v.sensors.api.functional.RelativeHumiditySensor;
 import org.b.v.sensors.api.functional.TemperatureSensor;
 import org.b.v.sensors.api.support.DefaultSensorType;
+import org.b.v.sensors.sensirion.error.ConfigurationValueNotAvailable;
 import org.b.v.sensors.sensirion.error.MeasurementTypeNotAvailable;
 import org.b.v.system.I2CConnection;
+import org.b.v.system.SensorHostSystem;
 
 
 public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySensor {
@@ -20,30 +22,39 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	public final static byte RELATIVE_HUMIDITY_HOLD_COMMAND = (byte) 0xE5;
 	public final static byte TEMPERATURE_NOHOLD_COMMAND = (byte) 0xF3;
 	public final static byte RELATIVE_HUMIDITY_NOHOLD_COMMAND = (byte) 0xF5;
-	public final static byte SOFT_RESET               = (byte)0xFE;
 	
-	private I2CConnection sensor;
+	public final static byte SOFT_RESET               = (byte)0xFE;//1111’1110
+
+	public final static byte USER_REGISTRY_WRITE      = (byte)0xE6;//1110’0110
+	public final static byte USER_REGISTRY_READ      = (byte)0xE7;//1110’0110
+	
+	
+	private SensorHostSystem system;
+	private I2CConnection i2c;
 	private String id;
 	
-	public SHT21OverI2C(String id,org.b.v.system.System system) throws IOException {
+	public SHT21OverI2C(String id,SensorHostSystem system) throws IOException {
 		this.id=id;
 		if(system==null){
 			throw new IllegalArgumentException("Cannot instantiate an I2C-implementation without a valid system");
 		}
-		sensor = system.createI2CConnection(40);
+		i2c = system.createI2CConnection(40);
+		this.system=system;
+		
 	}
 	
 	public double readTemperature() throws IOException, InterruptedException{
-		sensor.write(TEMPERATURE_NOHOLD_COMMAND);
-		TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
+		i2c.write(TEMPERATURE_NOHOLD_COMMAND);
+		system.waitMillis(100);
+		//TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
 		//TODO => make a system-class to avoid running waiting and to test the 
-		byte[] d = new byte[3];
-		int numberOfBytes = sensor.read(d, 0, 3);
+		byte[] rawValue = new byte[3];
+		int numberOfBytes = i2c.read(rawValue, 0, 3);
 		
 		if(numberOfBytes != 3){
 			throw new RuntimeException("Response should be 3 bytes long");
 		}
-		return convertToTemperature(extractValue(d)); 
+		return convertToTemperature(extractValue(rawValue)); 
 	}
 
 	@Override
@@ -52,12 +63,12 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 	
 	public double readHumidity() throws IOException, InterruptedException{
-		sensor.write(RELATIVE_HUMIDITY_NOHOLD_COMMAND);
-		
-		TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
+		i2c.write(RELATIVE_HUMIDITY_NOHOLD_COMMAND);
+		system.waitMillis(100);
+//		TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
 		//TODO => make a system-class to avoid running waiting and to test the 
 		byte[] d = new byte[3];
-		int numberOfBytes = sensor.read(d, 0, 3);
+		int numberOfBytes = i2c.read(d, 0, 3);
 		if(numberOfBytes != 3){
 			throw new RuntimeException("Response should be 3 bytes long");
 		}
@@ -65,27 +76,10 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 	
 	public void softreset() throws IOException, InterruptedException{
-		  sensor.write(SOFT_RESET);
+		  i2c.write(SOFT_RESET);
 		  TimeUnit.MILLISECONDS.sleep(50); // < 15 
 	}
 	
-//    public long getResolution() {
-//        this.softreset();
-//        try {
-//        	sensor.write(Command.USER_REG_R.getCommandByte());
-//            delay(100);
-//
-//            byte[] bytes = new byte[1];
-//            device.read(bytes, 0, 1);
-//            Resolution resolution = getBit(bytes[0]);
-//            return resolution;
-//        } catch (IOException e) {
-//            LOG.error("getResolution() failed.", e);
-//        }
-//        LOG.trace("Finished getResolution()");
-//        return Resolution.RES_UNDEFINED;
-//    }
-
 	private static int extractValue(byte[] d) {
 		int val = d[0];
 		val <<= 8;//shift 8 positions to the left
@@ -110,7 +104,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 			new DefaultSensorType()
 				.addMeassurementType("temperature",SensorValueType.DECIMAL)
 				.addMeassurementType("humidity",SensorValueType.DECIMAL)
-				.addConfigurationParameter("resulution",SensorValueType.LONG);
+				.addConfigurationParameter("resolution",SensorValueType.LONG);
 
 	public SensorValue meassure(String type) throws IOException, InterruptedException {
 		switch(type) {
@@ -122,8 +116,47 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 
 	@Override
 	public void configure(String parameter, SensorValue value) throws SensorConfigurationException {
-		//TODO
+		switch(parameter) {
+			case "resolution" : try {
+				changeResolution(value);
+			} catch (IOException e) {
+				throw new SensorConfigurationException(e);
+			}return;
+		}
+		throw new ConfigurationValueNotAvailable(parameter);
+	}
+	
+	protected void changeResolution(SensorValue value) throws IOException {
+		byte registerContent = readRegister();
+		byte newRegisterContent = bitAtPosition(bitAtPosition(registerContent,(byte)7,true),(byte)0,true);
+		changeRegister(newRegisterContent);
+	}
+	
+	private byte readRegister() throws IOException{
+        i2c.write(USER_REGISTRY_READ);
+        system.waitMillis(100);
+        byte[] bytes = new byte[1];
+        i2c.read(bytes, 0, 1);
+        return bytes[0];
 	}
 
-			
+	
+	private void changeRegister(byte content) throws IOException{
+		byte registryBuffer[] = new byte[0];
+		i2c.read(registryBuffer, 0, 1);
+		i2c.write(USER_REGISTRY_WRITE,content);
+	}
+	
+//	private static boolean valueOfBitAtPosition(byte number,byte position){
+//		return ((number & ( 1 << position )) >> position) == 1;
+//	}
+	
+	private static byte bitAtPosition(byte number,byte position,boolean bit){
+		if(bit) {
+			return (byte)(number | (1 << position));
+		} else {
+			return (byte)(number & (~(1 << position)));
+		}
+	}
+
 }

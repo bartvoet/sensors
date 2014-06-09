@@ -28,4 +28,9 @@ public class RPII2CDevice implements I2CConnection {
 		return sensor.read(buffer, offset, size);
 	}
 
+	@Override
+	public void write(byte... buffer) throws IOException {
+		sensor.write(buffer, 0, buffer.length);
+	}
+
 }

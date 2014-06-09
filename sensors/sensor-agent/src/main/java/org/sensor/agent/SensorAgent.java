@@ -38,7 +38,7 @@ public class SensorAgent {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SensorAgent.class);
 	
 	@Autowired
-	private org.b.v.system.System system;
+	private org.b.v.system.SensorHostSystem system;
 	
 	@Autowired
 	private SensorRegistry registry=new DefaultSensorRegistry();
@@ -64,7 +64,7 @@ public class SensorAgent {
 		
 	}
 	
-	public void setSystem(org.b.v.system.System system) {
+	public void setSystem(org.b.v.system.SensorHostSystem system) {
 		this.system = system;
 	}
 

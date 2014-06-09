@@ -51,7 +51,7 @@
   	<module>storage-api</module>
   	<module>storage-memory</module>
   	<module>storage-database</module>
-    <module>agent-runtime</module>
+    <module>agent-jse-runtime</module>
   	<module>sensor-api</module>
   	<module>sensor-sensirion</module>
     <module>sensor-bosch</module>

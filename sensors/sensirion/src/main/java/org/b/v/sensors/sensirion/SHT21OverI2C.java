@@ -1,7 +1,6 @@
 package org.b.v.sensors.sensirion;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorType;
@@ -13,6 +12,7 @@ import org.b.v.sensors.api.functional.TemperatureSensor;
 import org.b.v.sensors.api.support.DefaultSensorType;
 import org.b.v.sensors.sensirion.error.ConfigurationValueNotAvailable;
 import org.b.v.sensors.sensirion.error.MeasurementTypeNotAvailable;
+import org.b.v.sensors.sensirion.error.NotAnAllowedValueForConfiguration;
 import org.b.v.system.I2CConnection;
 import org.b.v.system.SensorHostSystem;
 
@@ -28,6 +28,10 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	public final static byte USER_REGISTRY_WRITE      = (byte)0xE6;//1110’0110
 	public final static byte USER_REGISTRY_READ      = (byte)0xE7;//1110’0110
 	
+	public final static String RESOLUTION_TEMP_14_RH_12 = "RESOLUTION_TEMP_14_RH_12";
+	public final static String RESOLUTION_TEMP_12_RH_8 = "RESOLUTION_TEMP_12_RH_8";
+	public final static String RESOLUTION_TEMP_13_RH_10 = "RESOLUTION_TEMP_13_RH_10";
+	public final static String RESOLUTION_TEMP_11_RH_11 = "RESOLUTION_TEMP_11_RH_11";
 	
 	private SensorHostSystem system;
 	private I2CConnection i2c;
@@ -46,8 +50,6 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	public double readTemperature() throws IOException, InterruptedException{
 		i2c.write(TEMPERATURE_NOHOLD_COMMAND);
 		system.waitMillis(100);
-		//TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
-		//TODO => make a system-class to avoid running waiting and to test the 
 		byte[] rawValue = new byte[3];
 		int numberOfBytes = i2c.read(rawValue, 0, 3);
 		
@@ -65,8 +67,6 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	public double readHumidity() throws IOException, InterruptedException{
 		i2c.write(RELATIVE_HUMIDITY_NOHOLD_COMMAND);
 		system.waitMillis(100);
-//		TimeUnit.MILLISECONDS.sleep(100);//depends on the configuration - to be implemented later
-		//TODO => make a system-class to avoid running waiting and to test the 
 		byte[] d = new byte[3];
 		int numberOfBytes = i2c.read(d, 0, 3);
 		if(numberOfBytes != 3){
@@ -77,7 +77,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	
 	public void softreset() throws IOException, InterruptedException{
 		  i2c.write(SOFT_RESET);
-		  TimeUnit.MILLISECONDS.sleep(50); // < 15 
+		  system.waitMillis(50);// < 15 
 	}
 	
 	private static int extractValue(byte[] d) {
@@ -104,8 +104,9 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 			new DefaultSensorType()
 				.addMeassurementType("temperature",SensorValueType.DECIMAL)
 				.addMeassurementType("humidity",SensorValueType.DECIMAL)
-				.addConfigurationParameter("resolution",SensorValueType.LONG);
+				.addConfigurationParameter("resolution",SensorValueType.STRING);
 
+	@Override
 	public SensorValue meassure(String type) throws IOException, InterruptedException {
 		switch(type) {
 			case "temperature" : return SensorValue.decimal("temperature",readTemperature());
@@ -127,9 +128,27 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	}
 	
 	protected void changeResolution(SensorValue value) throws IOException {
+		String newResolution = (String) value.getValue();
 		byte registerContent = readRegister();
-		byte newRegisterContent = bitAtPosition(bitAtPosition(registerContent,(byte)7,true),(byte)0,true);
-		changeRegister(newRegisterContent);
+		switch(newResolution) {
+			case RESOLUTION_TEMP_14_RH_12 : 
+				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
+				break;
+			case RESOLUTION_TEMP_12_RH_8 : 
+				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
+				break;
+			case RESOLUTION_TEMP_13_RH_10: 
+				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
+				break;
+			case RESOLUTION_TEMP_11_RH_11: 
+				changeRegister(transformRegisterByteForResolution(registerContent,true,true));
+				break;
+			default : throw new NotAnAllowedValueForConfiguration("resolution",newResolution);
+		}
+	}
+
+	private byte transformRegisterByteForResolution(byte registerContent,boolean bit7,boolean bit0) {
+		return bitAtPosition(bitAtPosition(registerContent,(byte)7,true),(byte)0,true);
 	}
 	
 	private byte readRegister() throws IOException{

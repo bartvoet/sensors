@@ -46,7 +46,7 @@
 	</build>
   
   <modules>
-  	<module>hub-runtime</module>
+  	<module>hub-jee-runtime</module>
   	<module>hub-events-mq</module>
   	<module>storage-api</module>
   	<module>storage-memory</module>

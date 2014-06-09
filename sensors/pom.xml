@@ -58,5 +58,7 @@
   	<module>system-api</module>
     <module>system-raspberrypi-raspbian</module>
     <module>system-olimex_A20-android</module>
+    <module>agent-android-runtime</module>
+    <module>hub-android-runtime</module>
   </modules>
 </project>

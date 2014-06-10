@@ -175,6 +175,12 @@
 
 		<dependency>
 			<groupId>org.b.v</groupId>
+			<artifactId>agent-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.b.v</groupId>
 			<artifactId>system-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>

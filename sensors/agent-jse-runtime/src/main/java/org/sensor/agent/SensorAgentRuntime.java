@@ -1,11 +1,25 @@
 package org.sensor.agent;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
 public class SensorAgentRuntime {
+
+	@Autowired
+	private SensorAgent agent;
+	
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("agent-context.xml");
-//		SensorAgent agent = context.getBean(SensorAgent.class);
+		new ClassPathXmlApplicationContext("agent-context.xml");
 	}
+	
+	@Scheduled(fixedDelay=15000)
+	public void meassure() throws IOException, InterruptedException{
+		agent.meassure();
+	}
+	
 }

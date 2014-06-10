@@ -11,7 +11,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("sensors")
 public class SpringBeanSensorRegistry implements BeanFactoryPostProcessor,SensorRegistry {
 
 	Map<String, Sensor> sensors = new HashMap<String,Sensor>();

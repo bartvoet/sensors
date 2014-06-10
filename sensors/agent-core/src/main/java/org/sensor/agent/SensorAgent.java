@@ -6,7 +6,6 @@ import java.util.Date;
 
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorValueDefinition;
-import org.b.v.system.SensorHostSystem;
 import org.sensor.agent.dependencies.SensorConfiguration;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorLogger;
@@ -17,29 +16,22 @@ import org.sensor.agent.dependencies.support.EmptySensorEvents;
 import org.sensor.agent.dependencies.support.EmptySensorLogger;
 import org.sensor.agent.dependencies.support.InMemorySensorConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
-/**
- * Handles requests for the application home page.
- */
-@Component
 public class SensorAgent {
 	
-	
-	@Autowired
-	private SensorHostSystem system;
-	
-	@Autowired
+//	private SensorHostSystem system;
 	private SensorRegistry registry=new DefaultSensorRegistry();
 	
 	private SensorConfiguration configuration=new InMemorySensorConfiguration();
 	private SensorLogger logger=new EmptySensorLogger();
 	private SensorEvents events=new EmptySensorEvents();
 	
-	public SensorAgent() throws IOException{}
+	public SensorAgent(SensorRegistry registry) {
+		this.registry=registry;
+//		this.system=system;
+	}
 	
-	@Scheduled(fixedDelay=15000)
+//	@Scheduled(fixedDelay=15000)
 	public void meassure() throws IOException, InterruptedException{
 		logger.debug("read sensors");
 		
@@ -54,9 +46,6 @@ public class SensorAgent {
 		
 	}
 	
-	public void setSystem(org.b.v.system.SensorHostSystem system) {
-		this.system = system;
-	}
 
 	public void setRegistry(SensorRegistry registry) {
 		this.registry = registry;

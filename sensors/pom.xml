@@ -50,9 +50,9 @@
   	<module>storage-api</module>
   	<module>storage-memory</module>
   	<module>storage-database</module>
-  	<module>sensor-api</module>
-  	<module>sensor-sensirion</module>
-    <module>sensor-bosch</module>
+  	<module>sensorlib-api</module>
+  	<module>sensorlib-sensirion</module>
+    <module>sensorlib-bosch</module>
   	<module>system-api</module>
     <module>system-raspberrypi-raspbian</module>
     <module>system-olimex_A20-android</module>

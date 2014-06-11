@@ -22,7 +22,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.b.v</groupId>
-			<artifactId>sensor-api</artifactId>
+			<artifactId>sensorlib-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		

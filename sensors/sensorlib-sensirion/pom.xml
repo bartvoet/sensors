@@ -6,7 +6,7 @@
 		<artifactId>sensors</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>sensor-sensirion</artifactId>
+	<artifactId>sensorlib-sensirion</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.b.v</groupId>
@@ -15,7 +15,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.b.v</groupId>
-			<artifactId>sensor-api</artifactId>
+			<artifactId>sensorlib-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

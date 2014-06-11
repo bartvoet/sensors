@@ -5,5 +5,5 @@
     <artifactId>sensors</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>sensor-bosch</artifactId>
+  <artifactId>sensorlib-api</artifactId>
 </project>

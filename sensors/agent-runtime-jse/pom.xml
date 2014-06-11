@@ -187,7 +187,7 @@
 
 		<dependency>
 			<groupId>org.b.v</groupId>
-			<artifactId>sensor-sensirion</artifactId>
+			<artifactId>sensorlib-sensirion</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

@@ -6,7 +6,7 @@
 		<artifactId>sensors</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>hub-jee-runtime</artifactId>
+	<artifactId>hub-runtime-jee</artifactId>
 	<packaging>war</packaging>
 
 	<properties>

@@ -58,8 +58,8 @@
     <module>system-olimex_A20-android</module>
     <module>agent-runtime-jse</module>
     <module>agent-runtime-android</module>
-  	<module>hub-jee-runtime</module>
-    <module>hub-android-runtime</module>
+  	<module>hub-runtime-jee</module>
+    <module>hub-runtime-android</module>
     <module>agent-core</module>
   </modules>
 </project>

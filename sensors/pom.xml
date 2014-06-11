@@ -46,19 +46,19 @@
 	</build>
   
   <modules>
-  	<module>hub-jee-runtime</module>
   	<module>hub-events-mq</module>
   	<module>storage-api</module>
   	<module>storage-memory</module>
   	<module>storage-database</module>
-    <module>agent-jse-runtime</module>
   	<module>sensor-api</module>
   	<module>sensor-sensirion</module>
     <module>sensor-bosch</module>
   	<module>system-api</module>
     <module>system-raspberrypi-raspbian</module>
     <module>system-olimex_A20-android</module>
-    <module>agent-android-runtime</module>
+    <module>agent-runtime-jse</module>
+    <module>agent-runtime-android</module>
+  	<module>hub-jee-runtime</module>
     <module>hub-android-runtime</module>
     <module>agent-core</module>
   </modules>

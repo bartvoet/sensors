@@ -5,5 +5,5 @@
     <artifactId>sensors</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>agent-android-runtime</artifactId>
+  <artifactId>agent-runtime-android</artifactId>
 </project>

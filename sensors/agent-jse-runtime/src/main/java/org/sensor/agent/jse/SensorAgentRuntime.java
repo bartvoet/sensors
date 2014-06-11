@@ -1,7 +1,8 @@
-package org.sensor.agent;
+package org.sensor.agent.jse;
 
 import java.io.IOException;
 
+import org.sensor.agent.SensorAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;

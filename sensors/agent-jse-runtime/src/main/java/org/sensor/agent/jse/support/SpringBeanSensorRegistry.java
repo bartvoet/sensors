@@ -1,4 +1,4 @@
-package org.sensor.agent.dependencies.support;
+package org.sensor.agent.jse.support;
 
 import java.util.Collection;
 import java.util.HashMap;

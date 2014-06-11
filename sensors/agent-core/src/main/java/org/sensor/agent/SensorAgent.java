@@ -6,7 +6,6 @@ import java.util.Date;
 
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorValueDefinition;
-import org.sensor.agent.dependencies.SensorConfiguration;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorLogger;
 import org.sensor.agent.dependencies.SensorMeasurement;
@@ -14,7 +13,6 @@ import org.sensor.agent.dependencies.SensorRegistry;
 import org.sensor.agent.dependencies.support.DefaultSensorRegistry;
 import org.sensor.agent.dependencies.support.EmptySensorEvents;
 import org.sensor.agent.dependencies.support.EmptySensorLogger;
-import org.sensor.agent.dependencies.support.InMemorySensorConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SensorAgent {
@@ -22,7 +20,7 @@ public class SensorAgent {
 //	private SensorHostSystem system;
 	private SensorRegistry registry=new DefaultSensorRegistry();
 	
-	private SensorConfiguration configuration=new InMemorySensorConfiguration();
+//	private SensorConfiguration configuration=new InMemorySensorConfiguration();
 	private SensorLogger logger=new EmptySensorLogger();
 	private SensorEvents events=new EmptySensorEvents();
 	
@@ -49,10 +47,6 @@ public class SensorAgent {
 
 	public void setRegistry(SensorRegistry registry) {
 		this.registry = registry;
-	}
-
-	public void setConfiguration(SensorConfiguration configuration) {
-		this.configuration = configuration;
 	}
 
 	public void setLogger(SensorLogger logger) {

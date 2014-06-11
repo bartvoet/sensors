@@ -61,5 +61,7 @@
   	<module>hub-runtime-jee</module>
     <module>hub-runtime-android</module>
     <module>agent-core</module>
+    <module>agent-configuration-api</module>
+    <module>agent-configuration-memory</module>
   </modules>
 </project>

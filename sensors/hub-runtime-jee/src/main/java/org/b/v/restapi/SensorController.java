@@ -42,25 +42,10 @@ public class SensorController {
 	public List<String> sensorsList() throws IOException, InterruptedException {
 		LOGGER.info("List of sensors");
 		List<String> list = new ArrayList<String>();
-		list.add("1");
-		list.add("2");
+		list.add("hello");
 		return list;
 
 	}
-
-//	@RequestMapping(value = "/sensors/{id}", method = RequestMethod.GET)
-//	@ResponseBody
-//	public Map<String,String> sensorValues(@PathVariable Integer id) throws IOException, InterruptedException {
-//		LOGGER.info("Sensor values");
-//		Map<String,String> map = new HashMap<String,String>();
-//		for(Sensor sensor : sensors()){
-//			for(String type : sensor.type().getTypeNames()) {
-//				map.put(type, Double.toString(sensor.meassure(type)));
-//			}
-//		}
-//		return map;
-//		
-//	}
 
 	@RequestMapping(value = "/sensors/{id}/measurements", method = RequestMethod.GET)
 	@ResponseBody
@@ -84,6 +69,30 @@ public class SensorController {
 				}
 			);
 	}
+
+	@RequestMapping(value = "/sensors/{id}/measurements", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> sensorInstructionsOverview(@PathVariable String id) throws IOException, InterruptedException {
+		LOGGER.info("Sensor values");
+		Map<String,Object> parameters = new HashMap<String,Object>();
+		parameters.put("sensorId", id);
+		final DateFormat format = new SimpleDateFormat("yyyy.MM.dd - HH:mm:ss");
+		return jdbcTemplate.query("select * from SensorConfiguration where sensorId=:sensorId and active=1", 
+				parameters, 
+				new RowMapper<Map<String,Object>>(){
+					@Override
+					public Map<String,Object> mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						Map<String,Object> result = new HashMap<String,Object>();
+						result.put("measurementTime", format.format(rs.getTimestamp("measurementTime")));
+						result.put("functionality", rs.getString("functionality"));
+						result.put("measurementValue", rs.getDouble("measurementValue"));
+						return result;
+					}
+				}
+			);
+	}
+
 	
 //	create table SensorMeassurement (
 //			sensorId varchar(50),

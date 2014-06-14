@@ -2,7 +2,7 @@ package org.sensor.agent.dependencies.support;
 
 import java.util.Collection;
 
-import org.b.v.sensors.api.SensorValue;
+import org.b.v.values.SensorValue;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorMeasurement;
 

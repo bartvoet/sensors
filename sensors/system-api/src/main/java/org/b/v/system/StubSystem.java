@@ -1,12 +1,10 @@
 package org.b.v.system;
 
 import java.io.IOException;
-
 //import org.springframework.context.annotation.Primary;
 //import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
-@Component("system")
+//@Component("system")
 //@Primary
 //@Profile("stubbed")
 public class StubSystem implements SensorHostSystem {

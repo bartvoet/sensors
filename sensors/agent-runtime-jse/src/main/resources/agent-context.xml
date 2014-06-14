@@ -18,6 +18,7 @@
 	
 	<beans:bean class="org.sensor.agent.SensorAgent">
 		<beans:constructor-arg index="0" ref="sensors"/>
+		<beans:property name="events" ref="events"/>
 	</beans:bean>
 
 	<task:annotation-driven executor="myExecutor" scheduler="myScheduler" />

@@ -11,6 +11,8 @@
 	<!-- TODO remove and replace by deployment description for xml (outside war)
 		or replacement by other registry if needed -->
 
+	<bean id="system" class="org.b.v.system.StubSystem"/>
+
 	<bean class="org.b.v.sensors.sensirion.SHT21OverI2C">
 		<constructor-arg index="0" value="hello"/>
 		<constructor-arg index="1" ref="system"/>

@@ -6,4 +6,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>sensorlib-api</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.b.v</groupId>
+  		<artifactId>sensor-foundation</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  
+  </dependencies>
+  
 </project>

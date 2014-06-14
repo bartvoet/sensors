@@ -2,7 +2,7 @@ package org.sensor.agent.dependencies;
 
 import java.util.Date;
 
-import org.b.v.sensors.api.SensorValue;
+import org.b.v.values.SensorValue;
 
 public class SensorMeasurement {
 

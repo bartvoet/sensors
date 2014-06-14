@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.b.v.sensor.agent.configuration.api.SensorConfigurationRepository;
-import org.b.v.sensors.api.SensorValue;
+import org.b.v.values.SensorValue;
 
 public class MemorySensorConfigurationRepository implements SensorConfigurationRepository {
 

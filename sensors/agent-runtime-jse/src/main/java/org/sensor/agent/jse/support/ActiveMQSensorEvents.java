@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.b.v.sensors.api.SensorValue;
+import org.b.v.values.SensorValue;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorMeasurement;
 import org.springframework.beans.factory.annotation.Autowired;

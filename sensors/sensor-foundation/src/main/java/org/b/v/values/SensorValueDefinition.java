@@ -1,4 +1,4 @@
-package org.b.v.sensors.api;
+package org.b.v.values;
 
 public class SensorValueDefinition implements Comparable<SensorValueDefinition>{
 

@@ -7,7 +7,7 @@ import java.util.Date;
 import org.b.v.sensor.agent.configuration.api.SensorConfigurationRepository;
 import org.b.v.sensor.agent.configuration.memory.MemorySensorConfigurationRepository;
 import org.b.v.sensors.api.Sensor;
-import org.b.v.sensors.api.SensorValueDefinition;
+import org.b.v.values.SensorValueDefinition;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorLogger;
 import org.sensor.agent.dependencies.SensorMeasurement;
@@ -15,7 +15,6 @@ import org.sensor.agent.dependencies.SensorRegistry;
 import org.sensor.agent.dependencies.support.DefaultSensorRegistry;
 import org.sensor.agent.dependencies.support.EmptySensorEvents;
 import org.sensor.agent.dependencies.support.EmptySensorLogger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class SensorAgent {
 	
@@ -57,7 +56,7 @@ public class SensorAgent {
 		this.logger = logger;
 	}
 	
-	@Autowired
+//	@Autowired
 	public void setEvents(SensorEvents events) {
 		this.events = events;
 	}

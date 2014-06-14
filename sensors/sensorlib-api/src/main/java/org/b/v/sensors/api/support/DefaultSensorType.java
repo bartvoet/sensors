@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.b.v.sensors.api.SensorType;
-import org.b.v.sensors.api.SensorValueDefinition;
-import org.b.v.sensors.api.SensorValueType;
+import org.b.v.values.SensorValueDefinition;
+import org.b.v.values.SensorValueType;
 
 public class DefaultSensorType implements SensorType {
 

@@ -5,8 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorType;
-import org.b.v.sensors.api.SensorValue;
 import org.b.v.system.I2CConnection;
+import org.b.v.values.SensorValue;
 
 
 public class SDP600OverI2C implements Sensor{

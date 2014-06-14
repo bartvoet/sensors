@@ -3,6 +3,7 @@ package org.b.v.sensors.api;
 import java.io.IOException;
 
 import org.b.v.sensors.api.error.SensorConfigurationException;
+import org.b.v.values.SensorValue;
 
 
 public interface Sensor {

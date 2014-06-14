@@ -19,7 +19,12 @@
 			<artifactId>system-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-	
+
+		<dependency>
+			<groupId>org.b.v</groupId>
+			<artifactId>sensorlib-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>	
 	
 		<!-- Spring -->
 		<dependency>

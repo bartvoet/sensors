@@ -63,5 +63,6 @@
     <module>agent-core</module>
     <module>agent-configuration-api</module>
     <module>agent-configuration-memory</module>
+    <module>sensor-foundation</module>
   </modules>
 </project>

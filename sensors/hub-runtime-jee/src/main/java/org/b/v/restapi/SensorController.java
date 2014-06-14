@@ -75,7 +75,9 @@ public class SensorController {
 	@RequestMapping(value = "/sensors/{sensorId}/configurations", method = RequestMethod.PUT)
 	@ResponseBody
 	public void applyNewConfiguration(@PathVariable String sensorId,@RequestBody List<SensorValue> configurations) throws IOException, InterruptedException {
-		
+		//store
+		//apply id
+		//and status
 	}
 
 	@RequestMapping(value = "/sensors/{sensorId}/configurations/{configurationId}", method = RequestMethod.GET)

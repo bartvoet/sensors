@@ -14,7 +14,7 @@ public class MemorySensorConfigurationRepository implements SensorConfigurationR
 	private Map<String,Set<SensorValue>> values;
 	
 	@Override
-	public void configure(String sensorId,SensorValue value) {
+	public void newConfigurationForSensor(String sensorId,SensorValue value) {
 		Set<SensorValue> valueSet = null; 
 		if(this.values.containsKey(sensorId)){
 			valueSet = this.values.get(sensorId);

@@ -13,8 +13,24 @@ public class MemorySensorConfigurationRepository implements SensorConfigurationR
 
 	private Map<String,Set<SensorValue>> values;
 	
+
 	@Override
-	public void newConfigurationForSensor(String sensorId,SensorValue value) {
+	public Collection<SensorValue> values(String sensorId) {
+		if(values.containsKey(sensorId)){
+			return Collections.emptySet();
+		}
+		return values.get(sensorId);
+	}
+
+	@Override
+	public void newConfigurationForSensor(String sensorId,Set<SensorValue> values) {
+		for(SensorValue value : values){
+			newConfigurationForSensor(sensorId, value);
+		}
+		
+	}
+
+	private void newConfigurationForSensor(String sensorId,SensorValue value) {
 		Set<SensorValue> valueSet = null; 
 		if(this.values.containsKey(sensorId)){
 			valueSet = this.values.get(sensorId);
@@ -25,15 +41,6 @@ public class MemorySensorConfigurationRepository implements SensorConfigurationR
 		valueSet.add(value);
 		
 	}
-
-	@Override
-	public Collection<SensorValue> values(String sensorId) {
-		if(values.containsKey(sensorId)){
-			return Collections.emptySet();
-		}
-		return values.get(sensorId);
-	}
-
 	
 	
 }

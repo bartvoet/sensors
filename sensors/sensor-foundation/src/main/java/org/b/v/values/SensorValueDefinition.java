@@ -1,5 +1,6 @@
 package org.b.v.values;
 
+
 public class SensorValueDefinition implements Comparable<SensorValueDefinition>{
 
 	private String name;
@@ -17,6 +18,15 @@ public class SensorValueDefinition implements Comparable<SensorValueDefinition>{
 		this.options=options;
 	}
 	
+	public static SensorValueDefinition stringDefinition(String name,Object...options) {
+		return new SensorValueDefinition(name,SensorValueType.STRING,options);
+	}
+	
+	public static SensorValueDefinition decimalDefinition(String name,Object...options) {
+		return new SensorValueDefinition(name,SensorValueType.DECIMAL,options);
+	}
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -27,6 +37,10 @@ public class SensorValueDefinition implements Comparable<SensorValueDefinition>{
 
 	public Object[] getOptions() {
 		return options;
+	}
+	
+	public SensorValue value(Object object) {
+		return new SensorValue(this,object);
 	}
 	
 	@Override

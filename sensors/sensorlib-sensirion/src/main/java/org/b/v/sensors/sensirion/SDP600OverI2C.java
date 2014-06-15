@@ -1,10 +1,12 @@
 package org.b.v.sensors.sensirion;
 
 import java.io.IOException;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorType;
+import org.b.v.sensors.api.error.SensorConfigurationException;
 import org.b.v.system.I2CConnection;
 import org.b.v.values.SensorValue;
 
@@ -68,15 +70,16 @@ public class SDP600OverI2C implements Sensor{
 	}
 
 	@Override
-	public void configure(String parameter, SensorValue value) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String identification() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void configure(Set<SensorValue> configurationValues)
+			throws SensorConfigurationException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

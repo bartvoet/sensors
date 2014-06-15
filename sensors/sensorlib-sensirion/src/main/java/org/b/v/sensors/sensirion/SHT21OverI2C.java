@@ -1,6 +1,7 @@
 package org.b.v.sensors.sensirion;
 
 import java.io.IOException;
+import java.util.Set;
 
 import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorType;
@@ -15,6 +16,8 @@ import org.b.v.system.I2CConnection;
 import org.b.v.system.SensorHostSystem;
 import org.b.v.values.SensorValue;
 import org.b.v.values.SensorValueType;
+
+import static org.b.v.sensors.api.support.DefaultSensorType.configuration;
 
 
 public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySensor {
@@ -101,12 +104,17 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 			new DefaultSensorType()
 				.addMeassurementType(MEASUREMENT_FOR_TEMPERATURE,SensorValueType.DECIMAL)
 				.addMeassurementType("humidity",SensorValueType.DECIMAL)
-				.addConfigurationParameterWithOptions
-									("resolution",SensorValueType.STRING,
-										OPTION_FOR_RESOLUTION_TEMP_14_RH_12,
-										OPTION_FOR_RESOLUTION_TEMP_12_RH_8,
-										OPTION_FOR_RESOLUTION_TEMP_11_RH_11,
-										OPTION_FOR_RESOLUTION_TEMP_13_RH_10);
+				.addConfiguration(
+						configuration("resolution")
+						.withType(SensorValueType.STRING)
+						.withDefaultValue(OPTION_FOR_RESOLUTION_TEMP_14_RH_12)
+						.withOptions(OPTION_FOR_RESOLUTION_TEMP_14_RH_12,
+									 OPTION_FOR_RESOLUTION_TEMP_12_RH_8,
+									 OPTION_FOR_RESOLUTION_TEMP_11_RH_11,
+									 OPTION_FOR_RESOLUTION_TEMP_13_RH_10)
+						);
+	
+	
 
 	public SensorType type() {
 		return sensorType;
@@ -119,18 +127,6 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 			case "humidity" : return SensorValue.decimal("humidity",readHumidity());
 		}
 		throw new MeasurementTypeNotAvailable(type);
-	}
-
-	@Override
-	public void configure(String parameter, SensorValue value) throws SensorConfigurationException {
-		switch(parameter) {
-			case "resolution" : try {
-				changeResolution(value);
-			} catch (IOException e) {
-				throw new SensorConfigurationException(e);
-			}return;
-		}
-		throw new ConfigurationValueNotAvailable(parameter);
 	}
 	
 	protected void changeResolution(SensorValue value) throws IOException {
@@ -184,4 +180,21 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 		}
 	}
 
+	@Override
+	public void configure(Set<SensorValue> configurationValues)
+			throws SensorConfigurationException {
+		for(SensorValue value : configurationValues) {
+			String parameter = value.getDefinition().getName();
+			switch(value.getDefinition().getName()) {
+				case "resolution" : try {
+					changeResolution(value);
+				} catch (IOException e) {
+					throw new SensorConfigurationException(e);
+				}
+				break;
+			}
+			throw new ConfigurationValueNotAvailable(parameter);
+		}
+	}
+	
 }

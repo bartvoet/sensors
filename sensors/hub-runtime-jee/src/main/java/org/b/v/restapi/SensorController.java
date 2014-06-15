@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.b.v.hub.SensorHubEvents;
 import org.b.v.values.SensorValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,9 @@ public class SensorController {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private SensorHubEvents events;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SensorController.class);
 	
@@ -71,6 +75,13 @@ public class SensorController {
 				}
 			);
 	}
+	
+	@RequestMapping(value = "/sensors/{id}/errors", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> errors(@PathVariable String id) throws IOException, InterruptedException {
+		LOGGER.info("Sensor values");
+		return new ArrayList<String>();
+	}
 
 	@RequestMapping(value = "/sensors/{sensorId}/configurations", method = RequestMethod.PUT)
 	@ResponseBody
@@ -78,6 +89,7 @@ public class SensorController {
 		//store
 		//apply id
 		//and status
+		//events.newConfiguration();
 	}
 
 	@RequestMapping(value = "/sensors/{sensorId}/configurations/{configurationId}", method = RequestMethod.GET)

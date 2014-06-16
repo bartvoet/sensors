@@ -13,7 +13,7 @@ public class MemorySensorConfigurationRepository implements SensorConfigurationR
 
 	private Map<String,Set<SensorValue>> values;
 	
-
+	//TODO keep configuration-id
 	@Override
 	public Collection<SensorValue> values(String sensorId) {
 		if(values.containsKey(sensorId)){

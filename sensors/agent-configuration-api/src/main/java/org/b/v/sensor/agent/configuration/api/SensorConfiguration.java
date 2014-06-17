@@ -7,7 +7,6 @@ import org.b.v.values.SensorValue;
 
 public class SensorConfiguration {
 
-
 	private Integer sequence;
 	private String centralizedId;
 	private Date creationTime;

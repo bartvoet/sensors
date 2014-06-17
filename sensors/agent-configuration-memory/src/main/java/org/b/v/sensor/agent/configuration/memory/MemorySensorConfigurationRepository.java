@@ -1,46 +1,40 @@
 package org.b.v.sensor.agent.configuration.memory;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import org.b.v.sensor.agent.configuration.api.NoConfigurationAvailable;
+import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.b.v.sensor.agent.configuration.api.SensorConfigurationRepository;
 import org.b.v.values.SensorValue;
 
 public class MemorySensorConfigurationRepository implements SensorConfigurationRepository {
 
-	private Map<String,Set<SensorValue>> values;
+	private Map<String,SensorConfiguration> values;
+	private AtomicInteger integer=new AtomicInteger();
 	
-	//TODO keep configuration-id
+	
 	@Override
-	public Collection<SensorValue> values(String sensorId) {
-		if(values.containsKey(sensorId)){
-			return Collections.emptySet();
+	public SensorConfiguration currentConfiguration(String sensorId) {
+		if(!values.containsKey(sensorId)){
+			throw new NoConfigurationAvailable();
 		}
 		return values.get(sensorId);
 	}
 
 	@Override
-	public void newConfigurationForSensor(String sensorId,Set<SensorValue> values) {
-		for(SensorValue value : values){
-			newConfigurationForSensor(sensorId, value);
-		}
-		
+	public void newConfigurationForSensor(String sensorId,String externalId,Set<SensorValue> values) {
+		this.values.put(sensorId, 
+						new SensorConfiguration(integer.incrementAndGet(),values,externalId)
+		);
 	}
 
-	private void newConfigurationForSensor(String sensorId,SensorValue value) {
-		Set<SensorValue> valueSet = null; 
-		if(this.values.containsKey(sensorId)){
-			valueSet = this.values.get(sensorId);
-		}else {
-			valueSet = new HashSet<SensorValue>();
-			this.values.put(sensorId, valueSet);
-		}
-		valueSet.add(value);
-		
+	@Override
+	public boolean containsConfigurationForSensor(String sensorId) {
+		return values.containsKey(sensorId);
 	}
+
 	
 	
 }

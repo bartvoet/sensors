@@ -1,11 +1,9 @@
 package org.sensor.agent.dependencies;
 
-import java.util.Collection;
-
-import org.b.v.values.SensorValue;
+import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 
 public interface SensorEvents {
 	public void pushMeasurement(SensorMeasurement measurement);
 
-	public Collection<SensorValue> getInstructions();
+	public SensorConfiguration getNewConfiguraiton(String sensorId);
 }

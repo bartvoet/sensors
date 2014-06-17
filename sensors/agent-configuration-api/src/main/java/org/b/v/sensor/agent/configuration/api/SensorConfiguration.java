@@ -38,5 +38,10 @@ public class SensorConfiguration {
 	public Set<SensorValue> getValues() {
 		return values;
 	}
+
+	public SensorConfiguration withSequence(int incrementAndGet) {
+		this.sequence=incrementAndGet;
+		return this;
+	}
 	
 }

@@ -4,9 +4,11 @@ package org.sensor.agent;
 import java.io.IOException;
 import java.util.Date;
 
+import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.b.v.sensor.agent.configuration.api.SensorConfigurationRepository;
 import org.b.v.sensor.agent.configuration.memory.MemorySensorConfigurationRepository;
 import org.b.v.sensors.api.Sensor;
+import org.b.v.values.SensorValue;
 import org.b.v.values.SensorValueDefinition;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorLogger;
@@ -18,7 +20,6 @@ import org.sensor.agent.dependencies.support.EmptySensorLogger;
 
 public class SensorAgent {
 	
-//	private SensorHostSystem system;
 	private SensorRegistry registry=new DefaultSensorRegistry();
 	
 	private SensorConfigurationRepository configuration=new MemorySensorConfigurationRepository();
@@ -32,19 +33,26 @@ public class SensorAgent {
 	
 	
 	public void meassure() throws IOException, InterruptedException{
-		events.getInstructions();
-		
 		logger.debug("read sensors");
 		
 		for(Sensor sensor : registry.activeSensors()){
 			for(SensorValueDefinition type : sensor.type().getMeasurementTypes()) {
+				applyNewConfigurationIfAvailable(sensor);
+				SensorValue value = sensor.meassure(type.getName());
 				events.pushMeasurement(
 						new SensorMeasurement(
-							sensor.identification(),type.getName(),new Date(),sensor.meassure(type.getName())
+							sensor.identification(),type.getName(),new Date(),value
 						));
 			}
 		}
-		
+	}
+
+	private void applyNewConfigurationIfAvailable(Sensor sensor) {
+		SensorConfiguration configuration = events.getNewConfiguraiton(sensor.identification());
+		if(configuration!=null) {
+			this.configuration.newConfigurationForSensor(sensor.identification(), configuration);
+			sensor.configure(configuration.getValues());
+		}
 	}
 	
 
@@ -56,7 +64,6 @@ public class SensorAgent {
 		this.logger = logger;
 	}
 	
-//	@Autowired
 	public void setEvents(SensorEvents events) {
 		this.events = events;
 	}

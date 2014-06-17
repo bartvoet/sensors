@@ -1,8 +1,6 @@
 package org.sensor.agent.dependencies.support;
 
-import java.util.Collection;
-
-import org.b.v.values.SensorValue;
+import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorMeasurement;
 
@@ -14,7 +12,7 @@ public class EmptySensorEvents implements SensorEvents {
 	}
 
 	@Override
-	public Collection<SensorValue> getInstructions() {
+	public SensorConfiguration getNewConfiguraiton(String sensorId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

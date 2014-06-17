@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.b.v.values.SensorValue;
+import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorMeasurement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +34,9 @@ public class ActiveMQSensorEvents implements SensorEvents {
 	}
 
 	@Override
-	public Collection<SensorValue> getInstructions() {
+	public SensorConfiguration getNewConfiguraiton(String sensorId) {
 		//jmsTemplate.receiveSelected(destinationName, messageSelector)
-		return new ArrayList<SensorValue>();//TODO to implement
+		return null;//TODO to implement
 		
 	}
 

@@ -36,11 +36,12 @@ public class SensorAgent {
 		logger.debug("read sensors");
 		
 		for(Sensor sensor : registry.activeSensors()){
+			applyNewConfigurationIfAvailable(sensor);
+			//TODO what to do in case of error in configuration
+			//TODO add error-handling
 			for(SensorValueDefinition type : sensor.type().getMeasurementTypes()) {
-				applyNewConfigurationIfAvailable(sensor);
 				SensorValue value = sensor.meassure(type.getName());
-				events.pushMeasurement(
-						new SensorMeasurement(
+				events.pushMeasurement(new SensorMeasurement(
 							sensor.identification(),type.getName(),new Date(),value
 						));
 			}

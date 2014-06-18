@@ -30,7 +30,7 @@ public class SensorAgent {
 		this.registry=registry;
 	}
 	
-	
+	//TODO startup-initialization
 	
 	public void meassure() throws IOException, InterruptedException{
 		logger.debug("read sensors");

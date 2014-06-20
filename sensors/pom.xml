@@ -46,23 +46,23 @@
 	</build>
   
   <modules>
-  	<module>hub-events-mq</module>
-  	<module>storage-api</module>
-  	<module>storage-memory</module>
-  	<module>storage-database</module>
-  	<module>sensorlib-api</module>
-  	<module>sensorlib-sensirion</module>
-    <module>sensorlib-bosch</module>
-  	<module>system-api</module>
-    <module>system-raspberrypi-raspbian</module>
-    <module>system-olimex_A20-android</module>
-    <module>agent-runtime-jse</module>
-    <module>agent-runtime-android</module>
-  	<module>hub-runtime-jee</module>
-    <module>hub-runtime-android</module>
-    <module>agent-core</module>
-    <module>agent-configuration-api</module>
-    <module>agent-configuration-memory</module>
+  	<module>sensor-hub-events-mq</module>
+  	<module>sensor-storage-api</module>
+  	<module>sensor-storage-memory</module>
+  	<module>sensor-storage-database</module>
+  	<module>sensor-lib-api</module>
+  	<module>sensor-lib-sensirion</module>
+    <module>sensor-lib-bosch</module>
+  	<module>sensor-system-api</module>
+    <module>sensor-system-raspberrypi-raspbian</module>
+    <module>sensor-system-olimex_A20-android</module>
+    <module>sensor-agent-runtime-jse</module>
+    <module>sensor-agent-runtime-android</module>
+  	<module>sensor-hub-runtime-jee</module>
+    <module>sensor-hub-runtime-android</module>
+    <module>sensor-agent-core</module>
+    <module>sensor-agent-configuration-api</module>
+    <module>sensor-agent-configuration-memory</module>
     <module>sensor-foundation</module>
   </modules>
 </project>

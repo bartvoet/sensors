@@ -7,7 +7,7 @@ import java.util.Date;
 import org.b.v.sensor.agent.configuration.api.SensorConfigurationRepository;
 import org.b.v.sensor.agent.configuration.memory.MemorySensorConfigurationRepository;
 import org.b.v.sensors.api.Sensor;
-import org.sensor.agent.dependencies.SensorEvents;
+import org.sensor.agent.dependencies.SensorAgentEvents;
 import org.sensor.agent.dependencies.SensorLogger;
 import org.sensor.agent.dependencies.SensorRegistry;
 import org.sensor.agent.dependencies.support.DefaultSensorRegistry;
@@ -24,7 +24,7 @@ public class SensorAgent {
 	
 	private SensorConfigurationRepository configuration=new MemorySensorConfigurationRepository();
 	private SensorLogger logger=new EmptySensorLogger();
-	private SensorEvents events=new EmptySensorEvents();
+	private SensorAgentEvents events=new EmptySensorEvents();
 	
 	public SensorAgent(SensorRegistry registry) {
 		this.registry=registry;
@@ -65,7 +65,7 @@ public class SensorAgent {
 		this.logger = logger;
 	}
 	
-	public void setEvents(SensorEvents events) {
+	public void setEvents(SensorAgentEvents events) {
 		this.events = events;
 	}
 		

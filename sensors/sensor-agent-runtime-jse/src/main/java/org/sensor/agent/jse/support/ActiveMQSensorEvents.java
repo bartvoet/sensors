@@ -9,7 +9,7 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.MappingJsonFactory;
-import org.sensor.agent.dependencies.SensorEvents;
+import org.sensor.agent.dependencies.SensorAgentEvents;
 import org.sensor.foundation.model.SensorConfiguration;
 import org.sensor.foundation.model.SensorMeasurement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 @Component("events")
-public class ActiveMQSensorEvents implements SensorEvents {
+public class ActiveMQSensorEvents implements SensorAgentEvents {
 
 	@Autowired
 	private JmsTemplate jmsTemplate;

@@ -1,8 +1,8 @@
-package org.sensor.agent.dependencies;
+package org.sensor.foundation.model;
 
 import java.util.Date;
 
-import org.b.v.values.SensorValue;
+import org.sensor.foundation.values.SensorValue;
 
 public class SensorMeasurement {
 

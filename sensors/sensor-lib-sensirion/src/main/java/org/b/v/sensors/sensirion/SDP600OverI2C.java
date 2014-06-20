@@ -8,7 +8,7 @@ import org.b.v.sensors.api.Sensor;
 import org.b.v.sensors.api.SensorType;
 import org.b.v.sensors.api.error.SensorConfigurationException;
 import org.b.v.system.I2CConnection;
-import org.b.v.values.SensorValue;
+import org.sensor.foundation.values.SensorValue;
 
 
 public class SDP600OverI2C implements Sensor{

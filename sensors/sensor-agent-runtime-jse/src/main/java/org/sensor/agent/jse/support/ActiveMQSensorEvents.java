@@ -5,13 +5,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
-import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.MappingJsonFactory;
 import org.sensor.agent.dependencies.SensorEvents;
-import org.sensor.agent.dependencies.SensorMeasurement;
+import org.sensor.foundation.model.SensorConfiguration;
+import org.sensor.foundation.model.SensorMeasurement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;

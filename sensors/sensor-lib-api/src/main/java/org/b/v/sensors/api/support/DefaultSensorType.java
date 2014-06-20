@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.b.v.sensors.api.SensorType;
-import org.b.v.values.SensorValue;
-import org.b.v.values.SensorValueDefinition;
-import org.b.v.values.SensorValueType;
+import org.sensor.foundation.values.SensorValue;
+import org.sensor.foundation.values.SensorValueDefinition;
+import org.sensor.foundation.values.SensorValueType;
 
 public class DefaultSensorType implements SensorType {
 

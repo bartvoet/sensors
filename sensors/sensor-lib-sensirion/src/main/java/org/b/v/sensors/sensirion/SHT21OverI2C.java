@@ -14,8 +14,8 @@ import org.b.v.sensors.sensirion.error.MeasurementTypeNotAvailable;
 import org.b.v.sensors.sensirion.error.NotAnAllowedValueForConfiguration;
 import org.b.v.system.I2CConnection;
 import org.b.v.system.SensorHostSystem;
-import org.b.v.values.SensorValue;
-import org.b.v.values.SensorValueType;
+import org.sensor.foundation.values.SensorValue;
+import org.sensor.foundation.values.SensorValueType;
 
 import static org.b.v.sensors.api.support.DefaultSensorType.configuration;
 

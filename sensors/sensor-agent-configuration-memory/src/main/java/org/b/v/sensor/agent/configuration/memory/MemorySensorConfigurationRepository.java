@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.b.v.sensor.agent.configuration.api.NoConfigurationAvailable;
-import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.b.v.sensor.agent.configuration.api.SensorConfigurationRepository;
+import org.sensor.foundation.model.SensorConfiguration;
 
 public class MemorySensorConfigurationRepository implements SensorConfigurationRepository {
 

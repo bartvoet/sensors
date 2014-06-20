@@ -3,8 +3,8 @@ package org.b.v.sensors.api;
 import java.util.List;
 import java.util.Set;
 
-import org.b.v.values.SensorValue;
-import org.b.v.values.SensorValueDefinition;
+import org.sensor.foundation.values.SensorValue;
+import org.sensor.foundation.values.SensorValueDefinition;
 
 public interface SensorType {
 	List<SensorValueDefinition> getConfigurationParameters();

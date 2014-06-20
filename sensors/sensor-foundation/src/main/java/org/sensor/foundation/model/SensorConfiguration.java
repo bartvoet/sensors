@@ -1,9 +1,9 @@
-package org.b.v.sensor.agent.configuration.api;
+package org.sensor.foundation.model;
 
 import java.util.Date;
 import java.util.Set;
 
-import org.b.v.values.SensorValue;
+import org.sensor.foundation.values.SensorValue;
 
 public class SensorConfiguration {
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.b.v.hub.SensorHubEvents;
-import org.b.v.values.SensorValue;
+import org.sensor.foundation.values.SensorValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

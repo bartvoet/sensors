@@ -1,6 +1,7 @@
 package org.sensor.agent.dependencies;
 
-import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
+import org.sensor.foundation.model.SensorConfiguration;
+import org.sensor.foundation.model.SensorMeasurement;
 
 public interface SensorEvents {
 	public void pushMeasurement(SensorMeasurement measurement);

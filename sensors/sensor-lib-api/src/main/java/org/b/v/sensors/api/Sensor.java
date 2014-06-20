@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import org.b.v.sensors.api.error.SensorConfigurationException;
-import org.b.v.values.SensorValue;
+import org.sensor.foundation.values.SensorValue;
 
 
 public interface Sensor {

@@ -4,19 +4,19 @@ package org.sensor.agent;
 import java.io.IOException;
 import java.util.Date;
 
-import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.b.v.sensor.agent.configuration.api.SensorConfigurationRepository;
 import org.b.v.sensor.agent.configuration.memory.MemorySensorConfigurationRepository;
 import org.b.v.sensors.api.Sensor;
-import org.b.v.values.SensorValue;
-import org.b.v.values.SensorValueDefinition;
 import org.sensor.agent.dependencies.SensorEvents;
 import org.sensor.agent.dependencies.SensorLogger;
-import org.sensor.agent.dependencies.SensorMeasurement;
 import org.sensor.agent.dependencies.SensorRegistry;
 import org.sensor.agent.dependencies.support.DefaultSensorRegistry;
 import org.sensor.agent.dependencies.support.EmptySensorEvents;
 import org.sensor.agent.dependencies.support.EmptySensorLogger;
+import org.sensor.foundation.model.SensorConfiguration;
+import org.sensor.foundation.model.SensorMeasurement;
+import org.sensor.foundation.values.SensorValue;
+import org.sensor.foundation.values.SensorValueDefinition;
 
 public class SensorAgent {
 	

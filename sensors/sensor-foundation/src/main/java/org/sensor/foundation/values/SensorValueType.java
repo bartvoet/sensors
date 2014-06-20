@@ -1,4 +1,4 @@
-package org.b.v.values;
+package org.sensor.foundation.values;
 
 public enum SensorValueType {
 	DECIMAL,STRING,LONG,DATE;

@@ -1,8 +1,8 @@
 package org.sensor.agent.dependencies.support;
 
-import org.b.v.sensor.agent.configuration.api.SensorConfiguration;
 import org.sensor.agent.dependencies.SensorEvents;
-import org.sensor.agent.dependencies.SensorMeasurement;
+import org.sensor.foundation.model.SensorConfiguration;
+import org.sensor.foundation.model.SensorMeasurement;
 
 public class EmptySensorEvents implements SensorEvents {
 

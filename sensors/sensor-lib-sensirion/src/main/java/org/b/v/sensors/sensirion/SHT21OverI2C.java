@@ -21,6 +21,7 @@ import static org.b.v.sensors.api.support.DefaultSensorType.configuration;
 
 
 public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySensor {
+	private static final String MEASUREMENT_FOR_HUMIDITY = "humidity";
 	private static final String MEASUREMENT_FOR_TEMPERATURE = "temperature";
 	public final static byte COMMAND_FOR_TEMPERATURE_WITH_HOLD = (byte) 0xE3;
 	public final static byte COMMAND_FOR_RELATIVE_HUMIDITY_WITH_HOLD = (byte) 0xE5;
@@ -103,7 +104,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	public static SensorType sensorType = 
 			new DefaultSensorType()
 				.addMeassurementType(MEASUREMENT_FOR_TEMPERATURE,SensorValueType.DECIMAL)
-				.addMeassurementType("humidity",SensorValueType.DECIMAL)
+				.addMeassurementType(MEASUREMENT_FOR_HUMIDITY,SensorValueType.DECIMAL)
 				.addConfiguration(
 						configuration("resolution")
 						.withType(SensorValueType.STRING)
@@ -124,7 +125,7 @@ public class SHT21OverI2C implements Sensor,TemperatureSensor,RelativeHumiditySe
 	public SensorValue meassure(String type) throws IOException, InterruptedException {
 		switch(type) {
 			case MEASUREMENT_FOR_TEMPERATURE : return SensorValue.decimal(MEASUREMENT_FOR_TEMPERATURE,readTemperature());
-			case "humidity" : return SensorValue.decimal("humidity",readHumidity());
+			case MEASUREMENT_FOR_HUMIDITY : return SensorValue.decimal(MEASUREMENT_FOR_HUMIDITY,readHumidity());
 		}
 		throw new MeasurementTypeNotAvailable(type);
 	}

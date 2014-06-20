@@ -1,15 +1,7 @@
 package org.sensor.agent.jse.support;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Map;
-
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.MappingJsonFactory;
 import org.sensor.agent.dependencies.SensorAgentEvents;
+import org.sensor.foundation.mapper.SensorMeasurementMapper;
 import org.sensor.foundation.model.SensorConfiguration;
 import org.sensor.foundation.model.SensorMeasurement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +14,16 @@ public class ActiveMQSensorEvents implements SensorAgentEvents {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
+	private SensorMeasurementMapper measurementMapper=new SensorMeasurementMapper();
+	
 	@Override
 	public void pushMeasurement(SensorMeasurement measurement) {
 		//TODO add configuration-id
-		DateFormat format = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss");
-		String message = measurement.getId() 
-							+ ";" 
-							+ format.format(measurement.getDate())
-							+ ";"
-							+ measurement.getType()
-							+ ";"
-							+ measurement.getValue().getValue();
-		
+		String message = measurementMapper.mapToJson(measurement);
 		jmsTemplate.convertAndSend("sensor_in", message);
 	}
 
-	
+
 	@Override
 	public SensorConfiguration getNewConfiguration(String sensorId) {
 		//factory.createJsonParser("").readValueAsTree().
@@ -47,13 +33,5 @@ public class ActiveMQSensorEvents implements SensorAgentEvents {
 		
 	}
 	
-	public static void main(String[] args) throws JsonParseException, IOException {
-		JsonFactory factory = new MappingJsonFactory();
-		JsonParser parser = factory.createJsonParser("{\"configuration\":\"world\",\"values\":\"world\"}");
-		Map map = (parser.readValueAs(Map.class));
-		System.out.println(map.get("hello"));
-		System.out.println(map.get("test"));
-
-	}
 
 }

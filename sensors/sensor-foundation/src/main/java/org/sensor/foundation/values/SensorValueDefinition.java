@@ -18,14 +18,6 @@ public class SensorValueDefinition implements Comparable<SensorValueDefinition>{
 		this.options=options;
 	}
 	
-	public static SensorValueDefinition stringDefinition(String name,Object...options) {
-		return new SensorValueDefinition(name,SensorValueType.STRING,options);
-	}
-	
-	public static SensorValueDefinition decimalDefinition(String name,Object...options) {
-		return new SensorValueDefinition(name,SensorValueType.DECIMAL,options);
-	}
-	
 	
 	public String getName() {
 		return name;
@@ -39,7 +31,7 @@ public class SensorValueDefinition implements Comparable<SensorValueDefinition>{
 		return options;
 	}
 	
-	public SensorValue value(Object object) {
+	public SensorValue withValue(Object object) {
 		return new SensorValue(this,object);
 	}
 	
@@ -56,7 +48,5 @@ public class SensorValueDefinition implements Comparable<SensorValueDefinition>{
 	public int compareTo(SensorValueDefinition o) {
 		return name.compareTo(o.name);
 	}
-	
-	
 	
 }

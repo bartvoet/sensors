@@ -81,7 +81,7 @@ public class DefaultSensorType implements SensorType {
 		}
 		
 		public SensorValue build(){
-			return new SensorValue(new SensorValueDefinition(parameter, type,options),value);
+			return type.definitionWithOptions(parameter, options).withValue(value);
 		}
 	}
  

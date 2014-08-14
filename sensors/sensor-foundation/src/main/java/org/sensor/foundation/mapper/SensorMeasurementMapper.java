@@ -9,18 +9,10 @@ import java.util.Date;
 import java.util.Map;
 
 import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.MappingJsonFactory;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializerProvider;
-import org.codehaus.jackson.map.module.SimpleModule;
 import org.sensor.foundation.model.SensorMeasurement;
-import org.sensor.foundation.values.SensorValue;
 import org.sensor.foundation.values.SensorValueType;
 
 public class SensorMeasurementMapper {

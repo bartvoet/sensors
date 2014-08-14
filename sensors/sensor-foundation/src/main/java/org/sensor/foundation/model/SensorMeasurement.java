@@ -6,32 +6,26 @@ import org.sensor.foundation.values.SensorValue;
 
 public class SensorMeasurement {
 
-	private String id;
-	private String type;
-	private Date time;
-	private SensorValue value;
+	private String sensorId;
+	private Date measurementTime;
+	private SensorValue measurementValue;
 
-	public SensorMeasurement(String id, String type,Date time, SensorValue value) {
+	public SensorMeasurement(String sensorId, Date time, SensorValue value) {
 		super();
-		this.id = id;
-		this.time=time;
-		this.value = value;
-		this.type = type;
+		this.sensorId = sensorId;
+		this.measurementTime=time;
+		this.measurementValue = value;
 	}
 
-	public String getId() {
-		return id;
+	public String getSensorId() {
+		return sensorId;
 	}
 	
-	public SensorValue getValue() {
-		return value;
+	public SensorValue getMeasurementValue() {
+		return measurementValue;
 	}
 	
-	public String getType() {
-		return type;
-	}
-	
-	public Date getDate(){
-		return time;
+	public Date getMeasurementDate(){
+		return measurementTime;
 	}
 }

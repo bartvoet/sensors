@@ -2,17 +2,21 @@ package org.b.v.restapi;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.b.v.hub.SensorHubEvents;
+import org.sensor.foundation.model.SensorMeasurement;
 import org.sensor.foundation.values.SensorValue;
+import org.sensor.foundation.values.SensorValueType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +75,36 @@ public class SensorController {
 						result.put("functionality", rs.getString("functionality"));
 						result.put("measurementValue", rs.getDouble("measurementValue"));
 						return result;
+					}
+				}
+			);
+	}
+	
+	@RequestMapping(value = "/sensors/{id}/nmeasurements", method = RequestMethod.GET)
+	@ResponseBody
+	public List<SensorMeasurement> nsensorValuesOverview(@PathVariable final String id) throws IOException, InterruptedException {
+		LOGGER.info("Sensor values");
+		Map<String,Object> parameters = new HashMap<String,Object>();
+		parameters.put("sensorId", id);
+		return jdbcTemplate.query("select * from SensorMeassurement where sensorId=:sensorId", 
+				parameters, 
+				new RowMapper<SensorMeasurement>(){
+					@Override
+					public SensorMeasurement mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+//						Map<String,Object> result = new HashMap<String,Object>();
+//						result.put("measurementTime", format.format(rs.getTimestamp("measurementTime")));
+//						result.put("functionality", rs.getString("functionality"));
+//						result.put("measurementValue", rs.getDouble("measurementValue"));
+						
+						SensorMeasurement measurement = 
+								new SensorMeasurement(
+										id, 
+										rs.getTimestamp("measurementTime"), 
+										SensorValueType.DECIMAL.definition(rs.getString("functionality")).withValue(rs.getDouble("measurementValue")));
+						
+						//new SensorMeasurement()
+						return measurement;
 					}
 				}
 			);

@@ -42,7 +42,7 @@ public class SensorAgent {
 			for(SensorValueDefinition type : sensor.type().getMeasurementTypes()) {
 				SensorValue value = sensor.meassure(type.getName());
 				events.pushMeasurement(new SensorMeasurement(
-							sensor.identification(),type.getName(),new Date(),value
+							sensor.identification(),new Date(),value
 						));
 			}
 		}
